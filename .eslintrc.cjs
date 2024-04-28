@@ -30,6 +30,7 @@ const config = {
       }
     ],
     "@typescript-eslint/require-await": "off",
+    "@typescript-eslint/no-empty-interface": ["error", { allowSingleExtends: true }],
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
@@ -38,22 +39,8 @@ const config = {
         }
       }
     ],
-    "drizzle/enforce-delete-with-where": [
-      "error",
-      {
-        "drizzleObjectName": [
-          "db"
-        ]
-      }
-    ],
-    "drizzle/enforce-update-with-where": [
-      "error",
-      {
-        "drizzleObjectName": [
-          "db"
-        ]
-      }
-    ]
+    "drizzle/enforce-delete-with-where": "error",
+    "drizzle/enforce-update-with-where": "error"
   }
 }
 module.exports = config;
