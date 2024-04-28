@@ -3,7 +3,7 @@ import {
   type DefaultSession,
   getServerSession,
   type NextAuthOptions,
-  User,
+  type User,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";

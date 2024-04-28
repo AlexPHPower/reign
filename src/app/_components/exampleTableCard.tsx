@@ -24,7 +24,6 @@ export default function ExampleTableCard() {
   });
 
   const lastScrollY = useRef(0);
-  const [triggerUpdate, setTriggerUpdate] = useState(false);
 
   const otherPlayers = [
     { name: "Notice Me Senpai", gamesPlayed: 10, wins: 8, kills: 35, top5: 7 },
@@ -75,18 +74,18 @@ export default function ExampleTableCard() {
   });
 
   return (
-    <Card className="shadow-secondary col-span-1 shadow-xl sm:col-span-2 lg:col-span-3">
+    <Card className="col-span-1 shadow-xl shadow-secondary sm:col-span-2 lg:col-span-3">
       <CardContent>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-primary w-[100px]">Pos.</TableHead>
+                <TableHead className="w-[100px] text-primary">Pos.</TableHead>
                 <TableHead className="text-primary">IGN</TableHead>
                 <TableHead className="text-primary">Games Played</TableHead>
                 <TableHead className="text-primary">Wins</TableHead>
                 <TableHead className="text-primary">Kills</TableHead>
-                <TableHead className="text-primary text-right">Top 5</TableHead>
+                <TableHead className="text-right text-primary">Top 5</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
