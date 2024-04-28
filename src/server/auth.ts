@@ -1,11 +1,13 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import {
-  getServerSession,
   type DefaultSession,
+  getServerSession,
   type NextAuthOptions,
+  User,
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 import { env } from "~/env";
 import { db } from "~/server/db";
@@ -52,6 +54,34 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+    }),
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "example@email.com",
+        },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials.password) return null;
+
+        const user = await db.query.users.findFirst({
+          where: (user, { eq }) => eq(user.email, credentials.email),
+        });
+
+        //Verify Password here
+        //We are going to use a simple === operator
+        //In production DB, passwords should be encrypted using something like bcrypt...
+        if (user && user.password === credentials.password) {
+          const { password, ...dbUserWithoutPassword } = user;
+          return dbUserWithoutPassword as User;
+        }
+
+        return null;
+      },
     }),
     /**
      * ...add more providers here.
