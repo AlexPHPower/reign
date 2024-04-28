@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import SignUpButton from "~/app/_components/signUpButton";
 
 export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -62,12 +63,7 @@ export default function Navbar() {
         </div>
         <div className="hidden lg:block lg:flex-grow">
           <div className="text-sm lg:mr-24 lg:flex lg:justify-end">
-            <a
-              href="/sign-up"
-              className="mt-4 block underline-offset-8 hover:underline lg:mt-0 lg:inline-block"
-            >
-              Sign Up
-            </a>
+            <SignUpButton />
           </div>
         </div>
         {isNavOpen && (
