@@ -67,7 +67,7 @@ export const authOptions: NextAuthOptions = {
         //We are going to use a simple === operator
         //In production DB, passwords should be encrypted using something like bcrypt...
         if (user && user.password === credentials.password) {
-          const { password, ...dbUserWithoutPassword } = user;
+          const { password: _, ...dbUserWithoutPassword } = user;
           return dbUserWithoutPassword as User;
         }
 
