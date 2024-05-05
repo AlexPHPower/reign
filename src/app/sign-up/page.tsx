@@ -1,10 +1,14 @@
-"use client";
-
 import { Card, CardHeader } from "@/components/ui/card";
 import React from "react";
 import { SignUpForm } from "~/app/_components/signup/signUpForm";
+import { getServerAuthSession } from "~/server/auth";
+import { redirect } from "next/navigation";
 
-export default function About() {
+export default async function About() {
+  const session = await getServerAuthSession();
+
+  if (session) redirect("/");
+
   return (
     <main>
       <div className="flex h-full min-h-screen w-full flex-col p-12">

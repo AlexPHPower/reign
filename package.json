@@ -14,9 +14,8 @@
   "dependencies": {
     "@auth/drizzle-adapter": "^0.7.0",
     "@clerk/nextjs": "^5.0.3",
-    "@dicebear/avatars": "^4.10.8",
-    "@dicebear/avatars-identicon-sprites": "^4.10.8",
     "@hookform/resolvers": "^3.3.4",
+    "@paralleldrive/cuid2": "^2.2.2",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-label": "^2.0.2",
@@ -28,6 +27,7 @@
     "@trpc/react-query": "next",
     "@trpc/server": "next",
     "@vercel/postgres": "^0.8.0",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.29.4",
@@ -47,6 +47,7 @@
     "zod": "^3.23.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/eslint": "^8.56.2",
     "@types/node": "^20.11.20",
     "@types/react": "^18.2.57",

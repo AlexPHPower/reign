@@ -41,6 +41,9 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db, createTable) as Adapter,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
