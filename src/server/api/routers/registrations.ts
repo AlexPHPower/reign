@@ -19,7 +19,7 @@ export const registerRouter = createTRPCRouter({
       try {
         await ctx.db.insert(users).values({
           id: createId(),
-          name: input.firstName + input.lastName,
+          name: input.firstName + " " + input.lastName,
           email: input.email,
           password: await hash(input.password, 10),
           inGameName: input.inGameName,
