@@ -8,10 +8,10 @@ import {
 import { type Adapter } from "next-auth/adapters";
 import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
-
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { createTable } from "~/server/db/schema";
+import bcrypt from "bcrypt";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -41,6 +41,9 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db, createTable) as Adapter,
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
@@ -60,13 +63,13 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials.password) return null;
 
         const user = await db.query.users.findFirst({
-          where: (user, { eq }) => eq(user.email, credentials.email),
+          where: (users, { eq }) => eq(users.email, credentials.email),
         });
 
-        //Verify Password here
-        //We are going to use a simple === operator
-        //In production DB, passwords should be encrypted using something like bcrypt...
-        if (user && user.password === credentials.password) {
+        if (
+          user?.password &&
+          bcrypt.compareSync(credentials.password, user.password)
+        ) {
           const { password: _, ...dbUserWithoutPassword } = user;
           return dbUserWithoutPassword as User;
         }

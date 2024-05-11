@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
+import { api } from "~/trpc/react";
 
 const FormSchema = z.object({
   firstName: z.string(),
@@ -21,6 +22,7 @@ const FormSchema = z.object({
   email: z.string().email({
     message: "Invalid email address.",
   }),
+  password: z.string(),
   inGameName: z.string(),
 });
 
@@ -31,17 +33,30 @@ export function SignUpForm() {
       firstName: "",
       lastName: "",
       email: "",
+      password: "",
       inGameName: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  const mutation = api.register.create.useMutation();
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     console.log(data);
-    toast({
-      title: "Thank you!",
-      description: "You have been added to the waitlist.",
-    });
-  }
+    try {
+      const response = mutation.mutate(data);
+      console.log(response);
+      toast({
+        title: "Thank you!",
+        description: "You have been added to the waitlist.",
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Registration Failed",
+        description: "Failed to register, please try again later",
+      });
+    }
+  };
 
   return (
     <Form {...form}>
@@ -95,6 +110,25 @@ export function SignUpForm() {
                   placeholder="Email"
                   className="rounded-xl"
                   {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/* Password */}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <Input
+                  type="password"
+                  placeholder="Password"
+                  className="rounded-xl"
+                  {...field}
+                  autoComplete="new-password"
                 />
               </FormControl>
               <FormMessage />

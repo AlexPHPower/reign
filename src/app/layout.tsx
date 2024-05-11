@@ -6,6 +6,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 import Navbar from "~/app/_components/navbar";
 import { Providers } from "~/app/_components/sessionProvider";
 import { getServerAuthSession } from "~/server/auth";
+import Footer from "~/app/_components/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,6 +34,8 @@ export default async function RootLayout({
           <Providers serverSession={serverSession}>
             <Navbar />
             {children}
+            <Toaster />
+            <Footer />
           </Providers>
         </TRPCReactProvider>
       </body>

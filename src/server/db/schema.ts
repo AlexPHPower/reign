@@ -45,6 +45,7 @@ export const users = createTable("user", {
   emailVerified: timestamp("emailVerified", {
     mode: "date",
   }).default(sql`CURRENT_TIMESTAMP`),
+  inGameName: varchar("inGameName", { length: 255 }),
   image: varchar("image", { length: 255 }),
   password: text("password"),
 });

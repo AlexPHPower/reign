@@ -1,16 +1,18 @@
 import { signOut, useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import { createAvatar } from "@dicebear/avatars";
-import * as style from "@dicebear/avatars-identicon-sprites";
+import { createAvatar, type Style } from "@dicebear/core";
+import { identicon } from "@dicebear/collection";
+
+const identiconFunction = identicon as Style<{ seed: string }>;
 
 export default function SignUpButton() {
   const { data: session, status } = useSession();
   if (status === "authenticated") {
-    const avatarSvg = createAvatar(style, {
+    const avatarSvg = createAvatar(identiconFunction, {
       seed: session?.user?.email ?? "random-seed",
     });
 
-    const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg)}`;
+    const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg.toString())}`;
 
     console.log(placeholder);
     return (
