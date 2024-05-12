@@ -68,7 +68,7 @@ import {
 } from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useSession } from "next-auth/react";
-import { createAvatar, Style } from "@dicebear/core";
+import { createAvatar, type Style } from "@dicebear/core";
 import { identicon } from "@dicebear/collection";
 
 const identiconFunction = identicon as Style<{ seed: string }>;
