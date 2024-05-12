@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import SignUpButton from "~/app/_components/signUpButton";
+import SignUpButton from "~/components/signUpButton";
 
 export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);

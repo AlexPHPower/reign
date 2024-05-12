@@ -1,6 +1,6 @@
 import { Card, CardHeader } from "@/components/ui/card";
 import React from "react";
-import { SignUpForm } from "~/app/_components/signup/signUpForm";
+import { SignUpForm } from "~/components/signup/signUpForm";
 import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "next/navigation";
 

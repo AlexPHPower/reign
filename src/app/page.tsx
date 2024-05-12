@@ -1,10 +1,10 @@
-import HeroSection from "~/app/_components/heroSection";
-import PayoutsCard from "~/app/_components/payoutsCard";
-import ExampleTableCard from "~/app/_components/exampleTableCard";
-import StatsCard from "~/app/_components/statsCard";
-import DiscordCard from "~/app/_components/discordCard";
-import MonthlyFeeCard from "~/app/_components/monthlyFeeCard";
-import ExampleChartCard from "~/app/_components/chartCard";
+import HeroSection from "~/components/heroSection";
+import PayoutsCard from "~/components/payoutsCard";
+import ExampleTableCard from "~/components/exampleTableCard";
+import StatsCard from "~/components/statsCard";
+import DiscordCard from "~/components/discordCard";
+import MonthlyFeeCard from "~/components/monthlyFeeCard";
+import ExampleChartCard from "~/components/chartCard";
 
 export default async function Home() {
   return (

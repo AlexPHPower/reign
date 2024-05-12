@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "~/components/ui/card";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Table,
@@ -9,7 +9,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "~/components/ui/table";
 
 function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);

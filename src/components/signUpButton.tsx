@@ -10,10 +10,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "~/components/ui/dropdown-menu";
 import {
   CreditCard,
-  Keyboard,
   LogOut,
   Settings,
   User,
