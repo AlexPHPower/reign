@@ -1,12 +1,12 @@
 import Link from "next/link";
 import {
   Home,
+  AreaChart,
+  Receipt,
   LineChart,
-  Package,
   Package2,
   Settings,
   Table,
-  Users2,
 } from "lucide-react";
 import {
   Tooltip,
@@ -31,14 +31,14 @@ export default function SidebarNav() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Home className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
+                <span className="sr-only">Home</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Dashboard</TooltipContent>
+            <TooltipContent side="right">Home</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
@@ -62,11 +62,11 @@ export default function SidebarNav() {
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Package className="h-5 w-5" />
-                <span className="sr-only">Products</span>
+                <AreaChart className="h-5 w-5" />
+                <span className="sr-only">Stats</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Products</TooltipContent>
+            <TooltipContent side="right">Stats</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
@@ -76,25 +76,11 @@ export default function SidebarNav() {
                 href="#"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Users2 className="h-5 w-5" />
-                <span className="sr-only">Customers</span>
+                <Receipt className="h-5 w-5" />
+                <span className="sr-only">Billing</span>
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Customers</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <LineChart className="h-5 w-5" />
-                <span className="sr-only">Analytics</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Analytics</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>

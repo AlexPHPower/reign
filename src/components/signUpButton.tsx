@@ -18,6 +18,7 @@ import {
   User,
   LayoutDashboard,
 } from "lucide-react";
+import Link from "next/link";
 
 const identiconFunction = identicon as Style<{ seed: string }>;
 
@@ -48,8 +49,10 @@ export default function SignUpButton() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              <span>Dashboard</span>
+              <Link href={"/dashboard"} className="inline-flex items-center">
+                <LayoutDashboard className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />
