@@ -1,24 +1,10 @@
-import * as React from "react";
-import { MoreHorizontal } from "lucide-react";
-import Image from "next/image";
+"use client";
 
+import * as React from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import {
   Table,
   TableBody,
@@ -28,8 +14,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+import UserTableRow from "@/components/dashboard/userTableRow";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Dashboard() {
+  const { data: session } = useSession();
+
+  if (!session || !session.user) return redirect("/");
+
   return (
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
@@ -56,36 +49,15 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
+                    <UserTableRow user={session.user} />
                     <TableRow>
                       <TableCell className="hidden sm:table-cell">
                         <Image
                           alt="Product image"
                           className="aspect-square rounded-md object-cover"
-                          height="64"
+                          height="44"
                           src="/placeholder.svg"
-                          width="64"
-                        />
-                      </TableCell>
-                      <TableCell className="font-medium">
-                        Laser Lemonade Machine
-                      </TableCell>
-                      <TableCell>
-                        <Badge variant="outline">Draft</Badge>
-                      </TableCell>
-                      <TableCell>$499.99</TableCell>
-                      <TableCell className="hidden md:table-cell">25</TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        2023-07-12 10:42 AM
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell className="hidden sm:table-cell">
-                        <Image
-                          alt="Product image"
-                          className="aspect-square rounded-md object-cover"
-                          height="64"
-                          src="/placeholder.svg"
-                          width="64"
+                          width="44"
                         />
                       </TableCell>
                       <TableCell className="font-medium">

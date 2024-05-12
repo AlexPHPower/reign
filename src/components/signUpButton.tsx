@@ -19,24 +19,18 @@ import {
   LayoutDashboard,
 } from "lucide-react";
 import Link from "next/link";
-
-const identiconFunction = identicon as Style<{ seed: string }>;
+import { getUserImage } from "~/lib/utils";
 
 export default function SignUpButton() {
   const { data: session, status } = useSession();
   if (status === "authenticated") {
-    const avatarSvg = createAvatar(identiconFunction, {
-      seed: session?.user?.email ?? "random-seed",
-    });
-
-    const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg.toString())}`;
-
+    const image = getUserImage(session);
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="mt-4 block px-4 py-2 lg:mt-0 lg:inline-block">
             <Image
-              src={session?.user?.image ?? placeholder}
+              src={image}
               alt="User Image"
               className="rounded-full"
               width={44}

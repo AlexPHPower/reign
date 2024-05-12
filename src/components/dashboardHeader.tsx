@@ -33,19 +33,14 @@ import {
 } from "~/components/ui/dropdown-menu";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
-import { createAvatar, Style } from "@dicebear/core";
-import { identicon } from "@dicebear/collection";
-
-const identiconFunction = identicon as Style<{ seed: string }>;
+import { getUserImage } from "~/lib/utils";
+import { redirect } from "next/navigation";
 
 export default function DashboardHeader() {
   const { data: session } = useSession();
+  if (!session || !session.user) return redirect("/");
 
-  const avatarSvg = createAvatar(identiconFunction, {
-    seed: session?.user?.email ?? "random-seed",
-  });
-
-  const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg.toString())}`;
+  const image = getUserImage(session.user);
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -131,7 +126,7 @@ export default function DashboardHeader() {
               className="overflow-hidden rounded-full"
             >
               <Image
-                src={session?.user?.image ?? placeholder}
+                src={image}
                 alt="User Image"
                 className="rounded-full"
                 width={44}
