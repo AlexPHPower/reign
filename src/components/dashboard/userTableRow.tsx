@@ -26,14 +26,10 @@ const UserTableRow: React.FC<UserTableRowProps> = ({ user }) => {
         />
       </TableCell>
       <TableCell className="font-medium">Laser Lemonade Machine</TableCell>
-      <TableCell>
-        <Badge variant="outline">Draft</Badge>
-      </TableCell>
+      <TableCell>12</TableCell>
       <TableCell>$499.99</TableCell>
       <TableCell className="hidden md:table-cell">25</TableCell>
-      <TableCell className="hidden md:table-cell">
-        2023-07-12 10:42 AM
-      </TableCell>
+      <TableCell className="hidden md:table-cell">12</TableCell>
     </TableRow>
   );
 };
