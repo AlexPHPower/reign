@@ -24,7 +24,7 @@ import { getUserImage } from "~/lib/utils";
 export default function SignUpButton() {
   const { data: session, status } = useSession();
   if (status === "authenticated") {
-    const image = getUserImage(session);
+    const image = getUserImage(session.user);
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
