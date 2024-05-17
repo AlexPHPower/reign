@@ -10,33 +10,27 @@ import {
   DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+} from "~/components/ui/dropdown-menu";
 import {
   CreditCard,
-  Keyboard,
   LogOut,
   Settings,
   User,
   LayoutDashboard,
 } from "lucide-react";
-
-const identiconFunction = identicon as Style<{ seed: string }>;
+import Link from "next/link";
+import { getUserImage } from "~/lib/utils";
 
 export default function SignUpButton() {
   const { data: session, status } = useSession();
   if (status === "authenticated") {
-    const avatarSvg = createAvatar(identiconFunction, {
-      seed: session?.user?.email ?? "random-seed",
-    });
-
-    const placeholder = `data:image/svg+xml;utf8,${encodeURIComponent(avatarSvg.toString())}`;
-
+    const image = getUserImage(session.user);
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="mt-4 block px-4 py-2 lg:mt-0 lg:inline-block">
             <Image
-              src={session?.user?.image ?? placeholder}
+              src={image}
               alt="User Image"
               className="rounded-full"
               width={44}
@@ -49,8 +43,10 @@ export default function SignUpButton() {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              <LayoutDashboard className="mr-2 h-4 w-4" />
-              <span>Dashboard</span>
+              <Link href={"/dashboard"} className="inline-flex items-center">
+                <LayoutDashboard className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <User className="mr-2 h-4 w-4" />

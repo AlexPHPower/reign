@@ -1,5 +1,5 @@
 import React from "react";
-import { HeroEmailForm } from "~/app/_components/heroEmailForm";
+import { HeroEmailForm } from "~/components/heroEmailForm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "~/server/auth";
 import { capitalise } from "~/lib/utils";

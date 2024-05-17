@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import React from "react";
 import dynamic from "next/dynamic";
 
-const HomeBarChartNoSSR = dynamic(() => import("~/app/_components/barChart"), {
+const HomeBarChartNoSSR = dynamic(() => import("~/components/barChart"), {
   ssr: false,
 });
 
