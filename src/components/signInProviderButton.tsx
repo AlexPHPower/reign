@@ -22,7 +22,7 @@ const SignInProviderButton: React.FC<SignInProviderButtonProps> = ({
           provider.name !== "Credentials" && (
             <Button
               variant="outline"
-              className="w-full"
+              className={`w-full ${provider.id === "discord" ? "bg-discord" : ""}`}
               onClick={() => signIn(provider.id, { callbackUrl: "/dashboard" })}
               key={provider.id}
             >

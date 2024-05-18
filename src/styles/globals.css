@@ -80,4 +80,8 @@
         padding-left: 0; /* Adjust padding if necessary */
         width: 100%;
     }
+
+    .bg-discord {
+        background-color: hsl(var(--discord));
+    }
 }
