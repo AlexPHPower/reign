@@ -7,7 +7,18 @@ await import("./src/env.js");
 /** @type {import("next").NextConfig} */
 const config = {
   images: {
-    domains: ["cdn.discordapp.com", "api.adorable.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "api.adorable.io",
+        port: "",
+      },
+    ],
   },
 };
 
