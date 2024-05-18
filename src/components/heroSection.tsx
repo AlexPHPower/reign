@@ -22,8 +22,8 @@ export default async function HeroSection() {
             <HeroEmailForm />
             <div>
               <p className="text-center text-neutral-400">
-                Join a community where passion meets competition, our esports
-                league is the battleground where legends are made.
+                Greatness awaits those who dare to compete. Join our esports
+                league.
               </p>
             </div>
           </CardContent>
