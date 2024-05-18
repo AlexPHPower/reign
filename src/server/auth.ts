@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db, createTable) as Adapter,
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60, // 1 hour
   },
   providers: [
     DiscordProvider({
