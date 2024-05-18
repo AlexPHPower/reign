@@ -1,22 +1,16 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
-import UserTableRow from "@/components/dashboard/userTableRow";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import OpponentTableRow from "~/components/dashboard/tableRow";
 
 export default function Dashboard() {

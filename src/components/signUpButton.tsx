@@ -1,7 +1,5 @@
 import { signOut, useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import { createAvatar, type Style } from "@dicebear/core";
-import { identicon } from "@dicebear/collection";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
