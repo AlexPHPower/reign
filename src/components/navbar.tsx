@@ -1,14 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SignUpButton from "~/components/signUpButton";
 
 export default function Navbar() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-20 border-b-2 bg-background">
+    <nav
+      className={`sticky top-0 z-20 transition-all duration-300 ease-in-out ${isScrolled ? "border-b-2 bg-background" : ""}`}
+    >
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between">
         <div className="flex flex-shrink-0 items-center lg:ml-24">
           <a href="/" className="text-xl font-semibold">
@@ -36,30 +55,6 @@ export default function Navbar() {
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
             </svg>
           </button>
-        </div>
-        <div className="hidden lg:block lg:flex-grow">
-          <div className="text-sm lg:mr-24 lg:flex lg:justify-end">
-            <div className="rounded-full border-2">
-              <a
-                href="/"
-                className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block"
-              >
-                Home
-              </a>
-              <a
-                href="/about"
-                className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block"
-              >
-                About Us
-              </a>
-              <a
-                href="/pricing"
-                className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block"
-              >
-                Pricing
-              </a>
-            </div>
-          </div>
         </div>
         <div className="hidden lg:block lg:flex-grow">
           <div className="text-sm lg:mr-24 lg:flex lg:justify-end">
