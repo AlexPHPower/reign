@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { HeroEmailForm } from "~/components/heroEmailForm";
 import Image from "next/image";
@@ -9,14 +11,14 @@ const teko = Teko({
   weight: ["400", "700"],
 });
 
-export default async function HeroSection() {
+export default function HeroSection() {
   return (
     <div>
       <Image
         src="/HeroImage.jpg"
         alt="Wraith, Bloodhound and Lifeline standing in front of orange"
-        height={1920}
-        width={1080}
+        height={1080}
+        width={1920}
         className="absolute left-0 top-0 z-0 h-max w-full object-cover"
       />
       <div className="relative z-10 flex min-h-screen items-center justify-center">

@@ -4,69 +4,79 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import SignInProviderButton from "~/components/signInProviderButton";
-import { getProviders } from "next-auth/react";
+import { getProviders, getCsrfToken } from "next-auth/react";
+
+const fetchData = async () => {
+  const csrfToken = await getCsrfToken();
+  const providers = await getProviders();
+  return { csrfToken, providers };
+};
 
 export default async function Login() {
-  const providers = await getProviders();
+  const { csrfToken, providers } = await fetchData();
+
   return (
-    <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
-          </div>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
+    <form method="post" action="/api/auth/callback/credentials">
+      <input name="csrfToken" type="hidden" defaultValue={csrfToken ?? ""} />
+      <div className="w-full lg:grid lg:min-h-screen lg:grid-cols-2 xl:min-h-[800px]">
+        <div className="flex items-center justify-center py-12">
+          <div className="mx-auto grid w-[350px] gap-6">
+            <div className="grid gap-2 text-center">
+              <h1 className="text-3xl font-bold">Login</h1>
+              <p className="text-balance text-muted-foreground">
+                Enter your email below to login to your account
+              </p>
             </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
+            <div className="grid gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="m@example.com"
+                  required
+                />
               </div>
-              <Input id="password" type="password" required />
+              <div className="grid gap-2">
+                <div className="flex items-center">
+                  <Label htmlFor="password">Password</Label>
+                  <Link
+                    href="/forgot-password"
+                    className="ml-auto inline-block text-sm underline"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
+                <Input id="password" type="password" required />
+              </div>
+              <Button type="submit" className="w-full">
+                Login
+              </Button>
+              {providers && <SignInProviderButton providers={providers} />}
             </div>
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-            {providers && <SignInProviderButton providers={providers} />}
-          </div>
-          <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/auth/register" className="underline">
-              Sign up
-            </Link>
-          </div>
-          <div className="text-center text-sm">
-            <Link href="/" className="underline">
-              Cancel
-            </Link>
+            <div className="mt-4 text-center text-sm">
+              Don&apos;t have an account?{" "}
+              <Link href="/auth/register" className="underline">
+                Sign up
+              </Link>
+            </div>
+            <div className="text-center text-sm">
+              <Link href="/" className="underline">
+                Cancel
+              </Link>
+            </div>
           </div>
         </div>
+        <div className="hidden bg-muted lg:block">
+          <Image
+            src="/LoginImage.png"
+            alt="Image"
+            width="1920"
+            height="1080"
+            className="h-full w-full object-cover opacity-50"
+          />
+        </div>
       </div>
-      <div className="hidden bg-muted lg:block">
-        <Image
-          src="/LoginImage.jpeg"
-          alt="Image"
-          width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
-      </div>
-    </div>
+    </form>
   );
 }

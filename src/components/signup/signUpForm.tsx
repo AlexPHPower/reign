@@ -15,6 +15,9 @@ import { Input } from "~/components/ui/input";
 import { toast } from "~/components/ui/use-toast";
 import { api } from "~/trpc/react";
 import React from "react";
+import { useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const FormSchema = z.object({
   firstName: z.string(),
@@ -27,12 +30,15 @@ const FormSchema = z.object({
 });
 
 export function SignUpForm() {
+  const searchParams = useSearchParams();
+  const emailParam = searchParams.get("email");
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
       firstName: "",
       lastName: "",
-      email: "",
+      email: emailParam ? decodeURIComponent(emailParam) : "",
       password: "",
       inGameName: "",
     },
@@ -49,6 +55,13 @@ export function SignUpForm() {
         title: "Thank you!",
         description: "You have been added to the waitlist.",
       });
+      const { email, password } = data;
+      await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      router.push("/dashboard");
     } catch (error) {
       console.error(error);
       toast({
@@ -153,7 +166,7 @@ export function SignUpForm() {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="NoticeMeSenpai" required {...field} />
+                    <Input placeholder="In Game Name" required {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
