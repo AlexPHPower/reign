@@ -2,6 +2,12 @@ import React from "react";
 import { HeroEmailForm } from "~/components/heroEmailForm";
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
+import { Teko } from "@next/font/google";
+
+const teko = Teko({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default async function HeroSection() {
   return (
@@ -15,11 +21,19 @@ export default async function HeroSection() {
       />
       <div className="relative z-10 flex min-h-screen items-center justify-center">
         <Card className="w-2/3 rounded-3xl bg-background/80 shadow-lg">
-          <CardHeader className="text-center text-6xl uppercase text-white">
-            A community where Legends are made
+          <CardHeader
+            className={`text-center text-2xl uppercase text-white lg:text-6xl ${teko.className} flex flex-nowrap`}
+          >
+            <div className="flex flex-nowrap items-center justify-center">
+              A community where&nbsp;
+              <span className="text-primary">Legends</span>
+              &nbsp;are made
+            </div>
           </CardHeader>
           <CardContent>
-            <HeroEmailForm />
+            <div className="hidden lg:block">
+              <HeroEmailForm />
+            </div>
             <div>
               <p className="text-center text-neutral-400">
                 Greatness awaits those who dare to compete. Join our esports

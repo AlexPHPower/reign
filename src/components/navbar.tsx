@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import SignUpButton from "~/components/signUpButton";
 
 export default function Navbar() {
-  const [isNavOpen, setIsNavOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -30,7 +29,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between">
         <div className="flex flex-shrink-0 items-center lg:ml-24">
-          <a href="/" className="text-xl font-semibold">
+          <a href="/" className="font-semibold lg:text-xl">
             <Image
               src="/reign.svg"
               alt="Reign Logo"
