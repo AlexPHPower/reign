@@ -1,5 +1,5 @@
 import { getServerAuthSession } from "~/server/auth";
-import { capitalise } from "~/lib/utils";
+import { capitalise, getUserImage } from "~/lib/utils";
 
 interface OpponentData {
   name: string;
@@ -14,11 +14,12 @@ export async function GET() {
   const session = await getServerAuthSession();
 
   if (!session || !session.user) return new Response(null, { status: 401 });
+  const userImage = getUserImage(session.user);
 
   const opponentData: OpponentData[] = [
     {
       name: capitalise(session.user.name)!,
-      image: session.user.image!,
+      image: userImage,
       kills: 12,
       price: "499.99",
       points: 25,
