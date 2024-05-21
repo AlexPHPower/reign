@@ -5,7 +5,7 @@ interface OpponentData {
   name: string;
   image: string;
   kills: number;
-  price: string;
+  played: number;
   points: number;
   placement: number;
 }
@@ -21,7 +21,7 @@ export async function GET() {
       name: capitalise(session.user.name)!,
       image: userImage,
       kills: 12,
-      price: "499.99",
+      played: 6,
       points: 25,
       placement: 2,
     },
@@ -29,7 +29,7 @@ export async function GET() {
       name: "Chester",
       image: "/Rick.png",
       kills: 30,
-      price: "499.99",
+      played: 6,
       points: 25,
       placement: 1,
     },
@@ -37,7 +37,7 @@ export async function GET() {
       name: "Giant Robot",
       image: "/Rick.png",
       kills: 17,
-      price: "999.99",
+      played: 6,
       points: 50,
       placement: 10,
     },
@@ -45,7 +45,7 @@ export async function GET() {
       name: "Super Speedy Car",
       image: "/Rick.png",
       kills: 12,
-      price: "799.99",
+      played: 6,
       points: 35,
       placement: 8,
     },
@@ -53,7 +53,7 @@ export async function GET() {
       name: "Hyper Jet",
       image: "/Rick.png",
       kills: 9,
-      price: "1299.99",
+      played: 6,
       points: 75,
       placement: 2,
     },
@@ -61,7 +61,7 @@ export async function GET() {
       name: "Magic Wand",
       image: "/Rick.png",
       kills: 20,
-      price: "299.99",
+      played: 6,
       points: 15,
       placement: 4,
     },

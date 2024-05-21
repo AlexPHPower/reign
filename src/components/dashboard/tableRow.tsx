@@ -8,7 +8,7 @@ interface TableData {
   name: string;
   image: string;
   kills: number;
-  price: string;
+  played: number;
   points: number;
   placement: number;
 }
@@ -80,7 +80,7 @@ export default function TableRows() {
           </TableCell>
           <TableCell className="font-medium">{opponent.name}</TableCell>
           <TableCell>{opponent.kills}</TableCell>
-          <TableCell>{opponent.price}</TableCell>
+          <TableCell>{opponent.played}</TableCell>
           <TableCell className="hidden md:table-cell">
             {opponent.placement}
           </TableCell>
