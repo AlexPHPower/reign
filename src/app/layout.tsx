@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { TRPCReactProvider } from "~/trpc/react";
 import { Providers } from "~/components/sessionProvider";
 import { getServerAuthSession } from "~/server/auth";
-import MainLayout from "~/components/layouts/mainLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,9 +26,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider>
-          <Providers serverSession={serverSession}>
-            <MainLayout>{children}</MainLayout>
-          </Providers>
+          <Providers serverSession={serverSession}>{children}</Providers>
         </TRPCReactProvider>
       </body>
     </html>

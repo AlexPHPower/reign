@@ -2,7 +2,6 @@
 
 import { TableCell, TableRow } from "~/components/ui/table";
 import Image from "next/image";
-import { Badge } from "~/components/ui/badge";
 import * as React from "react";
 import { getUserImage } from "~/lib/utils";
 import { type User } from "next-auth";

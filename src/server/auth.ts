@@ -88,6 +88,15 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    signIn: "/auth/signin",
+    newUser: "/auth/register",
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return url.startsWith("/") ? `${baseUrl}/dashboard` : url;
+    },
+  },
 };
 
 /**

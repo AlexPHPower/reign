@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, AreaChart, Receipt, Crown, Settings, Table } from "lucide-react";
+import { AreaChart, Receipt, Crown, Settings, Table } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,

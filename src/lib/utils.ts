@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { createAvatar, type Style } from "@dicebear/core";
 import { identicon } from "@dicebear/collection";
 import { type User } from "next-auth";
+import { Teko } from "@next/font/google";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -24,3 +25,8 @@ export function getUserImage(user: User) {
 
   return user.image ?? placeholder;
 }
+
+export const teko = Teko({
+  subsets: ["latin"],
+  weight: ["400"],
+});

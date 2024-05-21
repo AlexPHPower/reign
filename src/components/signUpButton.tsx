@@ -1,7 +1,5 @@
 import { signOut, useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-import { createAvatar, type Style } from "@dicebear/core";
-import { identicon } from "@dicebear/collection";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -78,7 +76,7 @@ export default function SignUpButton() {
     return (
       <button
         onClick={() => signIn()}
-        className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block"
+        className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block lg:text-xl"
       >
         Sign In
       </button>
