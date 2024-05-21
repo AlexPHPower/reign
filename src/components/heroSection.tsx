@@ -4,12 +4,7 @@ import React from "react";
 import { HeroEmailForm } from "~/components/heroEmailForm";
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import { Teko } from "@next/font/google";
-
-const teko = Teko({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
+import { teko } from "@/lib/utils";
 
 export default function HeroSection() {
   return (
