@@ -8,23 +8,27 @@ import { teko } from "@/lib/utils";
 
 export default function HeroSection() {
   return (
-    <div>
-      <Image
-        src="/HeroImage.jpg"
-        alt="Wraith, Bloodhound and Lifeline standing in front of orange"
-        height={1080}
-        width={1920}
-        className="absolute left-0 top-0 z-0 h-max w-full object-cover"
-      />
+    <div className="relative min-h-screen">
+      <div className="absolute left-0 top-[-100px] h-full w-full">
+        <Image
+          src="/HeroImage.jpeg"
+          alt="Wraith, Bloodhound and Lifeline standing in front of orange"
+          layout="fill"
+          objectFit="cover"
+          className="z-0"
+        />
+      </div>
       <div className="relative z-10 flex min-h-screen items-center justify-center">
-        <Card className="w-2/3 rounded-3xl bg-background/80 shadow-lg">
+        <Card className="w-11/12 rounded-3xl bg-background/80 p-4 shadow-lg lg:w-2/3">
           <CardHeader
-            className={`text-center text-2xl uppercase text-white lg:text-6xl ${teko.className} flex flex-nowrap`}
+            className={`text-center uppercase text-white lg:text-6xl ${teko.className}`}
           >
-            <div className="flex flex-nowrap items-center justify-center">
-              A community where&nbsp;
-              <span className="text-primary">Legends</span>
-              &nbsp;are made
+            <div className="flex flex-col flex-nowrap items-center justify-center lg:flex-row">
+              <span className="text-xl lg:text-6xl">
+                A community where&nbsp;
+              </span>
+              <span className="text-xl text-primary lg:text-6xl">Legends</span>
+              <span className="text-xl lg:text-6xl">&nbsp;are made</span>
             </div>
           </CardHeader>
           <CardContent>
@@ -32,7 +36,7 @@ export default function HeroSection() {
               <HeroEmailForm />
             </div>
             <div>
-              <p className="text-center text-neutral-400">
+              <p className="text-center text-base text-neutral-400 lg:text-lg">
                 Greatness awaits those who dare to compete. Join our esports
                 league.
               </p>
