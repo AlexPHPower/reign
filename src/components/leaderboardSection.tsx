@@ -9,7 +9,7 @@ export default function LeaderboardSection() {
         <div
           className={`font-semibold uppercase text-white lg:text-4xl ${teko.className}`}
         >
-          Win Like a <span className="text-primary">Champion</span>
+          Conquer the <span className="text-primary">Leaderboard</span>
         </div>
       </div>
       <div className="flex flex-nowrap items-center justify-center">
