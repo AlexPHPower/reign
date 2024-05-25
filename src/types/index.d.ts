@@ -13,3 +13,16 @@ export type SidebarNavItem = {
       items: NavLink[];
     }
 );
+
+export type TableData = {
+  name: string;
+  image: string;
+  kills: number;
+  played: number;
+  points: number;
+  placement: number;
+};
+
+export interface ApiResponse {
+  data: TableData[];
+}
