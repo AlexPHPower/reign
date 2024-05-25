@@ -4,14 +4,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Skeleton } from "~/components/ui/skeleton";
 
-interface TableData {
+type TableData = {
   name: string;
   image: string;
   kills: number;
   played: number;
   points: number;
   placement: number;
-}
+};
 
 interface ApiResponse {
   data: TableData[];
