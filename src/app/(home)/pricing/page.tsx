@@ -16,7 +16,7 @@ export default function Page() {
       <div className="flex h-full min-h-screen w-full flex-col items-center gap-8 p-12">
         <h1 className={`text-6xl`}>Membership Tiers</h1>
         <div className={`flex w-full justify-center`}>
-          <p className="w-1/2 text-center text-neutral-400">
+          <p className="w-1/2 text-center">
             We offer three tiers to match your budget and boost your potential
             winnings. The higher the tier, the more you contribute to the prize
             pool.
@@ -51,6 +51,15 @@ export default function Page() {
                 and want to contribute the most to the prize pool.
               </AccordionContent>
             </AccordionItem>
+            <AccordionItem value="item-9">
+              <AccordionTrigger>Who will i play against?</AccordionTrigger>
+              <AccordionContent>
+                You will be placed into a league with players from your tier
+                within a similar elo to you. If there aren&apos;t enough players
+                to fulfill our minimum player requirements for a league we will
+                not take payment.
+              </AccordionContent>
+            </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>What if i miss some games?</AccordionTrigger>
               <AccordionContent>
@@ -79,10 +88,8 @@ export default function Page() {
               <AccordionTrigger>What if i forget to cancel?</AccordionTrigger>
               <AccordionContent>
                 If you forget to cancel your membership and haven&apos;t yet
-                played any games, we will refund your payment in full. As people
-                who had a similar experience with a game pass and paid for 3
-                years without playing we understand that sometimes you forget to
-                cancel.
+                played any games fear not as we only take payment once you have
+                had a participating game in the league.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-7">
@@ -101,6 +108,18 @@ export default function Page() {
                 the user dashboard. Alternative methods will be available in the
                 future. Pending winnings will be displayed in the user
                 dashboard.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-10">
+              <AccordionTrigger>What if i am caught cheating?</AccordionTrigger>
+              <AccordionContent>
+                Cheaters will not be tolerated, you will be banned from further
+                reign tournaments and your winnings will be forfeit. Cheaters
+                waive their right to refunds. <br />
+                <br />
+                If you suspect someone of cheating please report them to us as
+                their monthly subscription will be added to a community prize
+                fund.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
