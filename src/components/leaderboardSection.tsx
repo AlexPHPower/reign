@@ -8,13 +8,13 @@ export default function LeaderboardSection() {
     <div className="mx-auto mb-20 w-full max-w-4xl">
       <div className="flex flex-nowrap items-center justify-center">
         <div
-          className={`font-semibold uppercase text-white lg:text-4xl ${teko.className}`}
+          className={`text-3xl font-semibold uppercase text-white lg:text-4xl ${teko.className}`}
         >
           Display your <span className="text-primary">Achievements</span>
         </div>
       </div>
       <div className="flex flex-nowrap items-center justify-center">
-        <p className="text-neutral-400">
+        <p className="text-center text-neutral-400">
           Just like your apex banner, show off your achievements to the world.
         </p>
       </div>

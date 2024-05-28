@@ -24,11 +24,11 @@ export default function HeroSection() {
             className={`text-center uppercase text-white lg:text-6xl ${teko.className}`}
           >
             <div className="flex flex-col flex-nowrap items-center justify-center lg:flex-row">
-              <span className="text-xl lg:text-6xl">
+              <span className="text-3xl lg:text-6xl">
                 A community where&nbsp;
               </span>
-              <span className="text-xl text-primary lg:text-6xl">Legends</span>
-              <span className="text-xl lg:text-6xl">&nbsp;are made</span>
+              <span className="text-3xl text-primary lg:text-6xl">Legends</span>
+              <span className="text-3xl lg:text-6xl">&nbsp;are made</span>
             </div>
           </CardHeader>
           <CardContent>
