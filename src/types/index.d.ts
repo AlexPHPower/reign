@@ -51,3 +51,16 @@ interface TierCardProps {
   features: Feature[];
   price: number;
 }
+
+interface ScrollingHomeCardProps {
+  cards: PlayerProfile[];
+}
+
+type PlayerProfile = {
+  name: string;
+  image: string;
+  badges: Record<string, string>;
+  played: number;
+  wins: number;
+  kills: number;
+};
