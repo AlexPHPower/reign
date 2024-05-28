@@ -1,5 +1,5 @@
 import { api } from "~/trpc/react";
-import LoadingPricePage from "~/app/(home)/about/loading";
+import LoadingPricePage from "~/app/(home)/pricing/loading";
 import type { TierDetails } from "~/types";
 import TierCard from "~/components/pricing/tier-card";
 import React from "react";

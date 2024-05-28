@@ -7,14 +7,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import LoadingPricePage from "~/app/(home)/about/loading";
+import LoadingPricePage from "~/app/(home)/pricing/loading";
 import Tiers from "~/components/pricing/tiers";
+import { teko } from "@/lib/utils";
 
 export default function Page() {
   return (
     <main>
       <div className="flex h-full min-h-screen w-full flex-col items-center gap-8 p-12">
-        <h1 className={`text-6xl`}>Membership Tiers</h1>
+        <h1 className={`text-8xl ${teko.className}`}>Membership Tiers</h1>
         <div className={`flex w-full justify-center`}>
           <p className="w-1/2 text-center">
             We offer three tiers to match your budget and boost your potential
@@ -26,7 +27,7 @@ export default function Page() {
           <Tiers />
         </Suspense>
         <div className="w-4/5 space-y-4">
-          <h2 className={`space-x-4 text-center text-6xl`}>
+          <h2 className={`space-x-4 text-center text-6xl ${teko.className}`}>
             Frequently Asked Questions
           </h2>
           <Accordion type="single" collapsible>

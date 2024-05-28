@@ -11,6 +11,7 @@ import { CircleCheck, CircleX } from "lucide-react";
 import React from "react";
 import type { Feature } from "~/types";
 import Tilt from "react-parallax-tilt";
+import { teko } from "@/lib/utils";
 
 export default function TierCard({
   title,
@@ -45,7 +46,9 @@ export default function TierCard({
     >
       <Card>
         <CardHeader className={`text-center text-4xl font-bold ${textClass}`}>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className={`${teko.className} text-5xl`}>
+            {title}
+          </CardTitle>
           <CardDescription className={`italic ${descriptionClass}`}>
             {description}
           </CardDescription>

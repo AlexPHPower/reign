@@ -4,11 +4,13 @@ import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import Image from "next/image";
 import React from "react";
 import Tilt from "react-parallax-tilt";
+import { teko } from "@/lib/utils";
 
 export default function About() {
   return (
     <main>
       <div className="flex h-full min-h-screen w-full flex-col items-center justify-between p-12">
+        <h1 className={`text-6xl ${teko.className}`}>About Us</h1>
         <Card className="flex flex-col items-center justify-center border-transparent">
           <CardContent className="items-center p-4 md:max-w-2xl lg:max-w-3xl">
             <CardHeader className="text-center text-4xl font-bold">
