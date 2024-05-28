@@ -4,11 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
 import type { ScrollingHomeCardProps } from "~/types";
+import { teko } from "~/lib/utils";
+import Tilt from "react-parallax-tilt";
 
 export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,9 +28,6 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
           0% {
             transform: translateX(0);
           }
-          90% {
-            transform: translateX(${containerWidth - totalWidth}px);
-          }
           100% {
             transform: translateX(${containerWidth - totalWidth}px);
           }
@@ -45,26 +44,69 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
     }
   }, [cards]);
 
+  const handleMouseEnter = () => {
+    setAnimationState("paused");
+  };
+
+  const handleMouseLeave = () => {
+    setAnimationState("running");
+  };
+
   return (
-    <div className="overflow-hidden whitespace-nowrap">
+    <div className="relative whitespace-nowrap py-8">
+      <div className="absolute inset-0 bg-gradient-to-r from-background via-primary to-background blur-3xl"></div>
       <div
-        className="animation-container flex space-x-4"
+        className="animation-container flex space-x-4 overflow-hidden"
         ref={ref}
         style={{
           width: containerWidth,
-          animation: `animateContainer 20s ease-in-out infinite`,
+          animation: `animateContainer 50s ease-in-out infinite`,
           animationPlayState: animationState,
         }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {[...cards, ...cards, ...cards, ...cards].map((card, index) => (
-          <Card key={index} className="inline-block min-w-[200px] ">
-            <CardHeader>
-              <CardTitle>{card}</CardTitle>
-              <CardDescription>Card Description</CardDescription>
+        {[...cards, ...cards, ...cards].map((card, index) => (
+          <Card
+            key={index}
+            className="flex min-w-[350px] flex-col items-center justify-start bg-[url('/backgroundTexture.png')] bg-contain text-center saturate-150"
+          >
+            <CardHeader className="flex flex-col items-center space-y-4">
+              <CardTitle className={`text-primary ${teko.className} text-3xl`}>
+                {card.name}
+              </CardTitle>
+              <img
+                src={card.image}
+                className="h-24 w-24 rounded-full"
+                alt="User's image"
+              />
             </CardHeader>
-            <CardContent>
-              <p>Card Content</p>
+            <CardContent className="flex flex-row items-center justify-center space-x-4 overflow-x-auto">
+              {Object.entries(card.badges).map(([key, value]) => (
+                <div key={key} className="flex flex-col items-center">
+                  <Tilt>
+                    <img
+                      src={value}
+                      alt={key}
+                      className="h-14 w-14 transform transition-transform hover:scale-110"
+                    />
+                  </Tilt>
+                </div>
+              ))}
             </CardContent>
+            <CardFooter>
+              <div className="flex flex-col space-y-2 text-left">
+                <div>
+                  <h2 className="text-lg font-bold">Played: {card.played}</h2>
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold">Wins: {card.wins}</h2>
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold">Kills: {card.kills}</h2>
+                </div>
+              </div>
+            </CardFooter>
           </Card>
         ))}
       </div>

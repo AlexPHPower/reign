@@ -53,5 +53,14 @@ interface TierCardProps {
 }
 
 interface ScrollingHomeCardProps {
-  cards: string[];
+  cards: PlayerProfile[];
 }
+
+type PlayerProfile = {
+  name: string;
+  image: string;
+  badges: Record<string, string>;
+  played: number;
+  wins: number;
+  kills: number;
+};
