@@ -43,6 +43,7 @@ export const authOptions: NextAuthOptions = {
   adapter: DrizzleAdapter(db, createTable) as Adapter,
   session: {
     strategy: "jwt",
+    maxAge: 60 * 60, // 1 hour
   },
   providers: [
     DiscordProvider({
@@ -87,6 +88,15 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  pages: {
+    signIn: "/auth/signin",
+    newUser: "/auth/register",
+  },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return url.startsWith("/") ? `${baseUrl}/dashboard` : url;
+    },
+  },
 };
 
 /**
