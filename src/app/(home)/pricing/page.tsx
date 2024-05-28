@@ -23,9 +23,7 @@ export default function Page() {
             pool.
           </p>
         </div>
-        <Suspense fallback={<LoadingPricePage />}>
-          <Tiers />
-        </Suspense>
+        <Tiers />
         <div className="w-4/5 space-y-4">
           <h2 className={`space-x-4 text-center text-6xl ${teko.className}`}>
             Frequently Asked Questions
