@@ -1,85 +1,128 @@
 "use client";
 
-import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import React from "react";
+import React, { Suspense } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "~/components/ui/accordion";
+import LoadingPricePage from "~/app/(home)/pricing/loading";
+import Tiers from "~/components/pricing/tiers";
+import { teko } from "@/lib/utils";
 
 export default function Page() {
   return (
     <main>
-      <div className="flex h-full min-h-screen w-full flex-col items-center justify-center p-12">
-        <Card>
-          <CardContent className="flex w-full flex-col items-start justify-center p-4 md:flex-row">
-            <div className="w-full max-w-4xl">
-              <CardHeader className="text-center text-2xl font-bold text-white">
-                Membership and Pricing
-              </CardHeader>
-              <p className="mb-6 ml-6 text-left text-neutral-400">
-                At Reign, we&apos;re dedicated to creating a thrilling and
-                equitable competitive environment. Membership to our league
-                costs just £10 per month, a fee that fuels not only the intense
-                competition but also the winnings you can achieve. Here’s how it
-                works:
-              </p>
-              <CardHeader className="text-center text-2xl font-bold text-white">
-                Why a Subscription Model?
-              </CardHeader>
-              <p className="mb-6 ml-6 text-left text-neutral-400">
-                Your monthly membership fee is pivotal in creating the prize
-                pool for each league. Out of the £10 fee, 30% is retained by
-                Reign to cover hosting, business expenses, and to ensure the
-                smooth operation and growth of our platform. The remaining 70%
-                goes directly into the prize pool.
-              </p>
-              <CardHeader className="text-center text-2xl font-bold text-white">
-                How the Prize Pool Works
-              </CardHeader>
-              <div className="mb-6 ml-6 text-left text-neutral-400">
-                <p>
-                  With approximately 60 players per league, and each
-                  contributing to the prize pool, the total available for
-                  winners each month is significant. Here&apos;s a breakdown of
-                  the potential winnings based on a single league setup:
-                </p>
+      <div className="flex h-full min-h-screen w-full flex-col items-center gap-8 p-12">
+        <h1 className={`text-8xl ${teko.className}`}>Membership Tiers</h1>
+        <div className={`flex w-full justify-center`}>
+          <p className="w-1/2 text-center">
+            We offer three tiers to match your budget and boost your potential
+            winnings. The higher the tier, the more you contribute to the prize
+            pool.
+          </p>
+        </div>
+        <Tiers />
+        <div className="w-4/5 space-y-4">
+          <h2 className={`space-x-4 text-center text-6xl ${teko.className}`}>
+            Frequently Asked Questions
+          </h2>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Why pay to play?</AccordionTrigger>
+              <AccordionContent>
+                By paying a monthly subscription you contribute to the prize
+                pool and help us maintain Reign for our users.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Which tier should i choose?</AccordionTrigger>
+              <AccordionContent>
+                Personally when it comes to our membership tiers we recommend
+                the Lord tier. It offers the best value for money and
+                contributes a little more to the prize pool. <br />
                 <br />
-                <div className="flex flex-col items-center">
-                  <ul className="list-disc text-left">
-                    <li>
-                      Total monthly fees collected: £600 (from 60 players)
-                    </li>
-                    <li>
-                      Amount allocated to prize pool: £420 (70% of total fees)
-                    </li>
-                    <li>Reign’s operational costs: £180 (30% of total fees)</li>
-                  </ul>
-                </div>
+                The Peasant tier is a great starting point for those who are new
+                to Reign and want to try it out. <br />
                 <br />
-                <p>
-                  The prize money is distributed in a tiered system down to the
-                  7th place, ensuring that multiple teams have the opportunity
-                  to win each month. Here is an example of how winnings might be
-                  distributed among the top seven teams:
-                </p>
+                The King tier is for those who are serious about their gaming
+                and want to contribute the most to the prize pool.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-9">
+              <AccordionTrigger>Who will i play against?</AccordionTrigger>
+              <AccordionContent>
+                You will be placed into a league with players from your tier
+                within a similar elo to you. If there aren&apos;t enough players
+                to fulfill our minimum player requirements for a league we will
+                not take payment.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>What if i miss some games?</AccordionTrigger>
+              <AccordionContent>
+                Unfortunately we cannot offer refunds for missed games, it is up
+                to you to ensure that you show up to play on time.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-4">
+              <AccordionTrigger>When are games played?</AccordionTrigger>
+              <AccordionContent>
+                Your games will always begin at the same time and on the same
+                day every week. You will have access to this information in the
+                player dashboard.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-5">
+              <AccordionTrigger>What if i want to cancel?</AccordionTrigger>
+              <AccordionContent>
+                You can cancel your subscription at any time and will not lose
+                access to the game until the end of the current billing period.
+                We encourage players to come back and play with us whenever they
+                can.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-6">
+              <AccordionTrigger>What if i forget to cancel?</AccordionTrigger>
+              <AccordionContent>
+                If you forget to cancel your membership and haven&apos;t yet
+                played any games fear not as we only take payment once you have
+                had a participating game in the league.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-7">
+              <AccordionTrigger>When do you payout?</AccordionTrigger>
+              <AccordionContent>
+                Payouts from the previous league will happen within 14 days of
+                the league finishing. This ensures the team has enough time to
+                verify the legitimacy of your win, we want to be able to ensure
+                that cheating is not possible.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-8">
+              <AccordionTrigger>How do you payout?</AccordionTrigger>
+              <AccordionContent>
+                Payouts will be processed via PayPal, you can connect this in
+                the user dashboard. Alternative methods will be available in the
+                future. Pending winnings will be displayed in the user
+                dashboard.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-10">
+              <AccordionTrigger>What if i am caught cheating?</AccordionTrigger>
+              <AccordionContent>
+                Cheaters will not be tolerated, you will be banned from further
+                reign tournaments and your winnings will be forfeit. Cheaters
+                waive their right to refunds. <br />
                 <br />
-                <div className="flex flex-col items-center">
-                  <ul className="list-disc text-left">
-                    <li>1st Place: £136.50 (35% of prize pool)</li>
-                    <li>2nd Place: £97.50 (25% of prize pool)</li>
-                    <li>3rd Place: £70.20 (18% of prize pool)</li>
-                    <li>4th Place: £46.80 (12% of prize pool)</li>
-                    <li>5th Place: £39.00 (10% of prize pool)</li>
-                    <li>6th Place: £30.00 (remaining prize pool)</li>
-                  </ul>
-                </div>
-                <br />
-                <p>
-                  For a first-place team, each member would receive about
-                  £49.00. This model ensures that multiple teams benefit from
-                  their strategic play and teamwork throughout the league.
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+                If you suspect someone of cheating please report them to us as
+                their monthly subscription will be added to a community prize
+                fund.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
       </div>
     </main>
   );

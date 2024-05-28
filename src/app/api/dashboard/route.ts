@@ -34,7 +34,7 @@ export async function GET() {
       placement: 1,
     },
     {
-      name: "Giant Robot",
+      name: "Dougie",
       image: "/Rick.png",
       kills: 17,
       played: 6,

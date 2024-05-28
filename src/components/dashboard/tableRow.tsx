@@ -3,19 +3,7 @@ import { TableCell, TableRow } from "~/components/ui/table";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Skeleton } from "~/components/ui/skeleton";
-
-type TableData = {
-  name: string;
-  image: string;
-  kills: number;
-  played: number;
-  points: number;
-  placement: number;
-};
-
-interface ApiResponse {
-  data: TableData[];
-}
+import type { ApiResponse, TableData } from "~/types";
 
 export default function TableRows() {
   const [tableData, setTableData] = useState<TableData[] | null>(null);
