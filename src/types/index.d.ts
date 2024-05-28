@@ -51,3 +51,7 @@ interface TierCardProps {
   features: Feature[];
   price: number;
 }
+
+interface ScrollingHomeCardProps {
+  cards: string[];
+}

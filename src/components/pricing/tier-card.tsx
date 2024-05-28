@@ -9,7 +9,7 @@ import {
 import { Separator } from "~/components/ui/separator";
 import { CircleCheck, CircleX } from "lucide-react";
 import React from "react";
-import type { Feature } from "~/types";
+import type { TierCardProps } from "~/types";
 import Tilt from "react-parallax-tilt";
 import { teko } from "@/lib/utils";
 
@@ -18,12 +18,7 @@ export default function TierCard({
   description,
   features,
   price,
-}: {
-  title: string;
-  description: string;
-  features: Feature[];
-  price: number;
-}) {
+}: TierCardProps) {
   const textClass =
     title === "Peasant tier"
       ? "text-neutral-400"
