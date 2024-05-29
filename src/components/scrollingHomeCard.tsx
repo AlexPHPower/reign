@@ -53,7 +53,7 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
   };
 
   return (
-    <div className="relative whitespace-nowrap py-8">
+    <div className="relative overflow-hidden whitespace-nowrap py-8 lg:overflow-visible">
       <div className="absolute inset-0 bg-gradient-to-r from-background via-primary to-background blur-3xl"></div>
       <div
         className="animation-container flex space-x-4 overflow-hidden"
