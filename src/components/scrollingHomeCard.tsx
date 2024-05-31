@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -10,7 +11,14 @@ import {
 } from "~/components/ui/card";
 import type { ScrollingHomeCardProps } from "~/types";
 import { teko } from "~/lib/utils";
+import { Orbitron } from "@next/font/google";
 import Tilt from "react-parallax-tilt";
+
+const orbitron = Orbitron({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,7 +43,6 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
       `;
 
       const styleSheet = document.createElement("style");
-      styleSheet.type = "text/css";
       styleSheet.innerText = keyframes;
       document.head.appendChild(styleSheet);
 
@@ -94,17 +101,34 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
                 </div>
               ))}
             </CardContent>
-            <CardFooter>
-              <div className="flex flex-col space-y-2 text-left">
-                <div>
-                  <h2 className="text-lg font-bold">Played: {card.played}</h2>
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold">Wins: {card.wins}</h2>
-                </div>
-                <div>
-                  <h2 className="text-lg font-bold">Kills: {card.kills}</h2>
-                </div>
+            <CardFooter className="relative w-full">
+              <div
+                className={`w-full ${orbitron.className} relative z-10 flex flex-col space-y-2 text-left`}
+              >
+                <h2 className="custom-border text-md w-full font-bold">
+                  Played: {card.played}
+                </h2>
+                <h2 className="custom-border text-md w-full font-bold">
+                  Kills: {card.kills}
+                </h2>
+                <h2 className="custom-border text-md w-full font-bold">
+                  Main: {card.main}
+                </h2>
+                <h2 className="custom-border text-md w-full font-bold">
+                  League Wins: {card.leagueWins}
+                </h2>
+                <h2 className="custom-border text-md w-full font-bold">
+                  Rival: {card.rival}
+                </h2>
+              </div>
+              <div className="absolute bottom-0 left-20 h-full w-full">
+                <Image
+                  src={`/${card.main.toLowerCase()}.png`}
+                  alt="Apex Legends Wraith"
+                  layout="fill"
+                  objectFit="contain"
+                  className="absolute"
+                />
               </div>
             </CardFooter>
           </Card>

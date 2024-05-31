@@ -84,4 +84,76 @@
     .bg-discord {
         background-color: hsl(var(--discord));
     }
+
+    .simple-border {
+        position: relative;
+        padding: 0.5rem 1rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 0.25rem;
+        color: #FFFFFF;
+    }
+
+    .simple-border::before,
+    .simple-border::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        pointer-events: none;
+    }
+
+    .simple-border::before {
+        top: -2px;
+        left: -2px;
+        bottom: -2px;
+        right: -2px;
+    }
+
+    .simple-border::after {
+        top: 2px;
+        left: 2px;
+        bottom: 2px;
+        right: 2px;
+    }
+
+    .custom-border {
+        position: relative;
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+        color: #FFFFFF; /* White text */
+        border-left: 4px solid rgba(255, 255, 255, 0.8); /* Bolder left side */
+    }
+
+    .custom-border::before,
+    .custom-border::after {
+        content: '';
+        position: absolute;
+        border: 1px solid rgba(255, 255, 255, 0.8); /* Light white border */
+        width: calc(100%); /* Adjust for bolder left side */
+        pointer-events: none; /* Ensure the pseudo-elements don't interfere with user interactions */
+    }
+
+    .custom-border::before {
+        top: -1px;
+        left: 0;
+        border-left: none;
+        border-top: none;
+        transform: translate(0, 0);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    .custom-border::after {
+        bottom: -1px;
+        right: 0;
+        border-right: none; /* No right border */
+        border-bottom: none; /* No bottom border */
+        transform: translate(0, 0);
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
 }

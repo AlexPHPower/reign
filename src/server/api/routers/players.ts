@@ -12,8 +12,10 @@ export const playersRouter = createTRPCRouter({
         "Back to Back": "/badges/back2back.png",
       },
       played: 10,
-      wins: 5,
       kills: 100,
+      leagueWins: 12,
+      rival: "Second Player",
+      main: "Wraith",
     };
     return [
       {
@@ -25,8 +27,10 @@ export const playersRouter = createTRPCRouter({
           "Back to Back": "/badges/back2back.png",
         },
         played: 10,
-        wins: 5,
         kills: 100,
+        leagueWins: 12,
+        rival: "Final Player",
+        main: "Wattson",
       },
       userProfile,
       {
@@ -38,8 +42,10 @@ export const playersRouter = createTRPCRouter({
           Pro: "/badges/certifiedPro.png",
         },
         played: 10,
-        wins: 5,
         kills: 100,
+        leagueWins: 12,
+        rival: "First Player",
+        main: "Bloodhound",
       },
       {
         name: "Penultimate Player",
@@ -48,8 +54,10 @@ export const playersRouter = createTRPCRouter({
           win: "/badges/win.png",
         },
         played: 10,
-        wins: 1,
         kills: 100,
+        leagueWins: 12,
+        rival: "Penultimate Player",
+        main: "Lifeline",
       },
       {
         name: "Final Player",
@@ -58,8 +66,10 @@ export const playersRouter = createTRPCRouter({
           win: "/badges/win.png",
         },
         played: 10,
-        wins: 1,
         kills: 100,
+        leagueWins: 12,
+        rival: "Second Player",
+        main: "Valkyrie",
       },
     ];
   }),

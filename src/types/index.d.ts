@@ -61,6 +61,8 @@ type PlayerProfile = {
   image: string;
   badges: Record<string, string>;
   played: number;
-  wins: number;
   kills: number;
+  leagueWins: number;
+  rival: string;
+  main: string;
 };
