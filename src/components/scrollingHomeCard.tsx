@@ -79,7 +79,9 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
             className="flex min-w-[350px] flex-col items-center justify-start bg-[url('/backgroundTexture.png')] bg-contain text-center saturate-150"
           >
             <CardHeader className="flex flex-col items-center space-y-4">
-              <CardTitle className={`text-primary ${teko.className} text-3xl`}>
+              <CardTitle
+                className={`text-primary ${teko.className} text-3xl tracking-wide`}
+              >
                 {card.name}
               </CardTitle>
               <img
