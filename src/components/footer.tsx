@@ -11,7 +11,7 @@ export default function Footer() {
             className="mb-4 flex items-center space-x-3 sm:mb-0 rtl:space-x-reverse"
           >
             <Image
-              src="/ReignText.svg"
+              src="/titan.svg"
               alt="Reign Logo"
               className="h-12 w-auto invert"
               width={100}

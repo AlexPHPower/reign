@@ -31,7 +31,7 @@ export default function Navbar() {
         <div className="flex flex-shrink-0 items-center lg:ml-24">
           <a href="/" className="font-semibold lg:text-xl">
             <Image
-              src="/reign.svg"
+              src="/titan.svg"
               alt="Reign Logo"
               className="h-24 w-auto invert"
               width={100}

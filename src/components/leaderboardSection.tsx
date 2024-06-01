@@ -23,7 +23,7 @@ export default function LeaderboardSection() {
           </p>
         </div>
         <div className="mt-5 w-full">
-          <div className="overflow-hidden whitespace-nowrap">
+          <div className="overflow-hidden">
             <div className="animation-container flex space-x-4">
               <div className="h-52 w-52 animate-pulse rounded-lg bg-neutral-800"></div>
               <div className="h-52 w-52 animate-pulse rounded-lg bg-neutral-800"></div>
@@ -45,7 +45,7 @@ export default function LeaderboardSection() {
   }
 
   return (
-    <div className="mx-auto mb-20 w-full max-w-4xl">
+    <div className="mx-auto mb-20 flex w-full flex-col items-center bg-gradient-to-t from-background via-primary to-background">
       <div className="flex flex-nowrap items-center justify-center">
         <div
           className={`text-3xl font-semibold uppercase text-white lg:text-4xl ${teko.className}`}
@@ -58,7 +58,7 @@ export default function LeaderboardSection() {
           Just like your apex banner, show off your achievements to the world.
         </p>
       </div>
-      <div className="mt-5 w-full">
+      <div className="mt-5 w-full overflow-hidden">
         <ScrollingHomeCard cards={data} />
       </div>
     </div>

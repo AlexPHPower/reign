@@ -22,7 +22,6 @@ const orbitron = Orbitron({
 
 export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState("100%");
   const [animationState, setAnimationState] = useState("paused");
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
       styleSheet.innerText = keyframes;
       document.head.appendChild(styleSheet);
 
-      setContainerWidth(totalWidth + "px");
       setAnimationState("running");
     }
   }, [cards]);
@@ -60,14 +58,13 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
   };
 
   return (
-    <div className="relative overflow-hidden whitespace-nowrap py-8 lg:overflow-visible">
-      <div className="absolute inset-0 bg-gradient-to-r from-background via-primary to-background blur-3xl"></div>
+    <div className="relative py-8">
+      <div className="absolute inset-0 blur-3xl"></div>
       <div
-        className="animation-container flex space-x-4 overflow-hidden"
+        className="animation-container flex space-x-4"
         ref={ref}
         style={{
-          width: containerWidth,
-          animation: `animateContainer 50s ease-in-out infinite`,
+          animation: `animateContainer 50s linear infinite`,
           animationPlayState: animationState,
         }}
         onMouseEnter={handleMouseEnter}
@@ -90,7 +87,7 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
                 alt="User's image"
               />
             </CardHeader>
-            <CardContent className="flex flex-row items-center justify-center space-x-4 overflow-x-auto">
+            <CardContent className="flex flex-row items-center justify-center space-x-4">
               {Object.entries(card.badges).map(([key, value]) => (
                 <div key={key} className="flex flex-col items-center">
                   <Tilt>

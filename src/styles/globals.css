@@ -156,4 +156,21 @@
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
 
+    /* Custom scrollbar styles */
+    ::-webkit-scrollbar {
+        width: 6px; /* width of the scrollbar */
+    }
+
+    ::-webkit-scrollbar-track {
+        background: hsl(var(--background)); /* background of the scrollbar track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: hsl(var(--primary)); /* color of the scrollbar thumb */
+        border-radius: 6px; /* roundness of the scrollbar thumb */
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: white; /* color of the scrollbar thumb when hovered */
+    }
 }
