@@ -47,10 +47,8 @@ export function SignUpForm() {
   const mutation = api.register.create.useMutation();
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    console.log(data);
     try {
       const response = mutation.mutate(data);
-      console.log(response);
       toast({
         title: "Thank you!",
         description: "You have been added to the waitlist.",

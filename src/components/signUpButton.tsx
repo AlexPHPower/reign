@@ -76,9 +76,9 @@ export default function SignUpButton() {
     return (
       <button
         onClick={() => signIn()}
-        className="mt-4 block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block lg:text-xl"
+        className="block px-4 py-2 underline-offset-4 hover:underline lg:mt-0 lg:inline-block lg:text-xl"
       >
-        Sign In
+        Get Started
       </button>
     );
   }

@@ -124,9 +124,9 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
                 <Image
                   src={`/${card.main.toLowerCase()}.png`}
                   alt="Apex Legends Wraith"
-                  layout="fill"
-                  objectFit="contain"
-                  className="absolute"
+                  fill={true}
+                  sizes={"100px"}
+                  className="absolute object-contain"
                 />
               </div>
             </CardFooter>

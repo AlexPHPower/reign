@@ -5,8 +5,8 @@ export const tierRouter = createTRPCRouter({
   tiers: publicProcedure.query((): Tier => {
     return {
       peasant: {
-        title: "Peasant tier",
-        description: "For those without faith in their ability",
+        title: "Militia tier",
+        description: "For those just enlisting in the fight for freedom.",
         features: [
           { name: "Leaderboards", enabled: true },
           { name: "Stats pages", enabled: true },
@@ -22,8 +22,8 @@ export const tierRouter = createTRPCRouter({
         price: 10,
       },
       lord: {
-        title: "Lord tier",
-        description: "For those who believe in their potential",
+        title: "IMC Elite tier",
+        description: "For those who harness the power of advanced warfare.",
         features: [
           { name: "Leaderboards", enabled: true },
           { name: "Stats pages", enabled: true },
@@ -39,8 +39,9 @@ export const tierRouter = createTRPCRouter({
         price: 15,
       },
       king: {
-        title: "King tier",
-        description: "For the apex predators among us",
+        title: "Titan tier",
+        description:
+          "For those who dominate the battlefield with unrivaled might.",
         features: [
           { name: "Leaderboards", enabled: true },
           { name: "Stats pages", enabled: true },
