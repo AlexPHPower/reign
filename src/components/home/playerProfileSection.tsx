@@ -1,7 +1,7 @@
 "use client";
 
 import { teko } from "~/lib/utils";
-import ScrollingHomeCard from "~/components/scrollingHomeCard";
+import ScrollingHomeCard from "~/components/home/scrollingHomeCard";
 import { api } from "~/trpc/react";
 
 export default function PlayerProfileSection() {

@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { HeroEmailForm } from "~/components/heroEmailForm";
+import { HeroEmailForm } from "~/components/home/heroEmailForm";
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import { teko } from "@/lib/utils";
+import { teko } from "~/lib/utils";
 
 export default function HeroSection() {
   return (
