@@ -11,9 +11,14 @@ const ParticlesBackground: React.FC = () => {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadLinksPreset(engine);
-    }).then(() => {
-      setInit(true);
-    });
+    })
+      .then(() => {
+        setInit(true);
+      })
+      .catch((e) => {
+        setInit(false);
+        console.error(e);
+      });
   }, []);
 
   const particlesLoaded = async (container?: Container): Promise<void> => {

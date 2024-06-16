@@ -2,7 +2,6 @@
 
 import React from "react";
 import { HeroEmailForm } from "~/components/home/heroEmailForm";
-import Image from "next/image";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import { teko } from "~/lib/utils";
 

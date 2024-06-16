@@ -48,7 +48,7 @@ export function SignUpForm() {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     try {
-      const response = mutation.mutate(data);
+      mutation.mutate(data);
       toast({
         title: "Thank you!",
         description: "You have been added to the waitlist.",
