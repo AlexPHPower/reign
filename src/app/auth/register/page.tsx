@@ -12,6 +12,7 @@ import { redirect } from "next/navigation";
 import { getProviders } from "next-auth/react";
 import SignInProviderButton from "~/components/signInProviderButton";
 import Link from "next/link";
+import ParticlesBackground from "~/components/signup/animatedBackground";
 
 export default async function About() {
   const session = await getServerAuthSession();
@@ -21,8 +22,9 @@ export default async function About() {
 
   return (
     <main>
-      <div className="flex h-full min-h-screen w-full flex-col p-32">
-        <Card className="mx-auto max-w-sm">
+      <div className="flex h-full min-h-screen w-full flex-col justify-center">
+        <ParticlesBackground />
+        <Card className="z-10 mx-auto max-w-sm">
           <CardHeader>
             <CardTitle className="text-xl">Sign Up</CardTitle>
             <CardDescription>

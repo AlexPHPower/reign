@@ -8,6 +8,7 @@ import {
   CardContent,
 } from "~/components/ui/card";
 import { SquareUserRound, Trophy } from "lucide-react";
+import { teko } from "~/lib/utils";
 
 export default function CommunitySection() {
   return (
@@ -17,15 +18,17 @@ export default function CommunitySection() {
           className={`bg-radial-gradient flex flex-row p-8 shadow shadow-2xl backdrop-brightness-125`} // added padding to the Card
         >
           <CardHeader className={`w-full items-center justify-center`}>
-            <CardTitle className="w-full text-3xl lg:w-2/3 lg:text-6xl">
+            <CardTitle
+              className={`w-full text-3xl lg:w-2/3 lg:text-7xl ${teko.className}`}
+            >
               Play Well.
               <br /> Get Noticed.
-              <br /> Go Pro
+              <br /> <span className={`text-primary`}>Go Pro.</span>
             </CardTitle>
-            <CardDescription className={`mx-auto w-full lg:w-2/3 lg:text-xl`}>
-              Your stats are public, dominate the leaderboards and get noticed
-              by orgs. We want to help the competitive community grow and help
-              generate new and upcoming talent.
+            <CardDescription className={`mx-auto w-full lg:w-2/3 lg:text-lg`}>
+              Showcase your skills and climb the leaderboards to catch the eye
+              of top organizations. Join us in fostering the competitive
+              community and discovering the next wave of elite talent.
             </CardDescription>
           </CardHeader>
           <CardContent

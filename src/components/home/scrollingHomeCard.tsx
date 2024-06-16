@@ -64,13 +64,22 @@ export default function ScrollingHomeCard({ cards }: ScrollingHomeCardProps) {
         className="animation-container flex space-x-4"
         ref={ref}
         style={{
-          animation: `animateContainer 50s linear infinite`,
+          animation: `animateContainer 100s linear infinite`,
           animationPlayState: animationState,
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        {[...cards, ...cards, ...cards].map((card, index) => (
+        {[
+          ...cards,
+          ...cards,
+          ...cards,
+          ...cards,
+          ...cards,
+          ...cards,
+          ...cards,
+          ...cards,
+        ].map((card, index) => (
           <Card
             key={index}
             className="flex min-w-[350px] flex-col items-center justify-start bg-[url('/backgroundTexture.png')] bg-contain text-center saturate-150"
