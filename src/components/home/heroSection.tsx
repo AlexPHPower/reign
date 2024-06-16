@@ -1,21 +1,18 @@
 "use client";
 
 import React from "react";
-import { HeroEmailForm } from "~/components/heroEmailForm";
-import Image from "next/image";
+import { HeroEmailForm } from "~/components/home/heroEmailForm";
 import { Card, CardContent, CardHeader } from "~/components/ui/card";
-import { teko } from "@/lib/utils";
+import { teko } from "~/lib/utils";
 
 export default function HeroSection() {
   return (
     <div className="relative min-h-screen">
       <div className="absolute left-0 top-[-100px] h-full w-full">
-        <Image
+        <img
           src="/HeroImage.jpeg"
           alt="Wraith, Bloodhound and Lifeline standing in front of orange"
-          layout="fill"
-          objectFit="cover"
-          className="z-0"
+          className="z-0 h-full w-full object-cover"
         />
       </div>
       <div className="relative z-10 flex min-h-screen items-center justify-center">

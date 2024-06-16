@@ -25,9 +25,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 z-20 transition-all duration-300 ease-in-out ${isScrolled ? "border-b-2 bg-background" : ""}`}
+      className={`sticky top-0 z-20 transition-all duration-300 ease-in-out ${isScrolled ? "border-b-2 backdrop-blur" : ""}`}
     >
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between">
+      <div className="mx-auto flex flex-wrap items-center justify-between">
         <div className="flex flex-shrink-0 items-center lg:ml-24">
           <a href="/" className="font-semibold lg:text-xl">
             <Image
@@ -38,6 +38,14 @@ export default function Navbar() {
               height={24}
               priority
             />
+          </a>
+        </div>
+        <div className="flex flex-shrink-0 justify-end gap-4 lg:flex-grow">
+          <a href="/about" className="lg:block">
+            About
+          </a>
+          <a href="/pricing" className="lg:block">
+            Pricing
           </a>
         </div>
         <div className="lg:block lg:flex-grow">

@@ -1,13 +1,12 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "~/components/ui/accordion";
-import LoadingPricePage from "~/app/(home)/pricing/loading";
 import Tiers from "~/components/pricing/tiers";
 import { teko } from "@/lib/utils";
 

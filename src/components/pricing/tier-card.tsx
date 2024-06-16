@@ -20,16 +20,16 @@ export default function TierCard({
   price,
 }: TierCardProps) {
   const textClass =
-    title === "Peasant tier"
+    title === "Militia tier"
       ? "text-neutral-400"
-      : title === "Lord tier"
+      : title === "IMC Elite tier"
         ? "text-primary"
         : "";
 
   const descriptionClass =
-    title === "Peasant tier"
+    title === "Militia tier"
       ? "text-neutral-600"
-      : title === "Lord tier"
+      : title === "IMC Elite tier"
         ? "text-neutral-400"
         : "text-neutral-200";
 
@@ -49,7 +49,7 @@ export default function TierCard({
           </CardDescription>
         </CardHeader>
         <div className={`flex w-full justify-center`}>
-          <Separator className="my-4 w-4/5" />
+          <Separator className="w-4/5" />
         </div>
         <CardContent className="flex w-full flex-col items-center justify-center p-4 md:flex-row">
           <ul className={`text-center text-neutral-200`} role={`list`}>
