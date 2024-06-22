@@ -23,7 +23,7 @@ export default function Page() {
           </p>
         </div>
         <Tiers />
-        <div className="w-4/5 space-y-4">
+        <div className="w-4/5 space-y-4" id={`faq`}>
           <h2 className={`space-x-4 text-center text-6xl ${teko.className}`}>
             Frequently Asked Questions
           </h2>
@@ -32,7 +32,7 @@ export default function Page() {
               <AccordionTrigger>Why pay to play?</AccordionTrigger>
               <AccordionContent>
                 By paying a monthly subscription you contribute to the prize
-                pool and help us maintain Reign for our users.
+                pool and help us maintain Titan for our users.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
@@ -43,7 +43,7 @@ export default function Page() {
                 contributes a little more to the prize pool. <br />
                 <br />
                 The Peasant tier is a great starting point for those who are new
-                to Reign and want to try it out. <br />
+                to Titan and want to try it out. <br />
                 <br />
                 The King tier is for those who are serious about their gaming
                 and want to contribute the most to the prize pool.
@@ -112,12 +112,19 @@ export default function Page() {
               <AccordionTrigger>What if i am caught cheating?</AccordionTrigger>
               <AccordionContent>
                 Cheaters will not be tolerated, you will be banned from further
-                reign tournaments and your winnings will be forfeit. Cheaters
+                Titan tournaments and your winnings will be forfeit. Cheaters
                 waive their right to refunds. <br />
                 <br />
                 If you suspect someone of cheating please report them to us as
                 their monthly subscription will be added to a community prize
                 fund.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-10">
+              <AccordionTrigger>What if i am caught smurfing?</AccordionTrigger>
+              <AccordionContent>
+                Smurfing will be treated the same as cheating, you will be
+                banned and refused refund.
               </AccordionContent>
             </AccordionItem>
           </Accordion>

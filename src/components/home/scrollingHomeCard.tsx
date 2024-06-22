@@ -11,7 +11,7 @@ import {
 } from "~/components/ui/card";
 import type { ScrollingHomeCardProps } from "~/types";
 import { teko } from "~/lib/utils";
-import { Orbitron } from "@next/font/google";
+import { Orbitron } from "next/font/google";
 import Tilt from "react-parallax-tilt";
 
 const orbitron = Orbitron({

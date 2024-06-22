@@ -32,7 +32,7 @@ export default function Navbar() {
           <a href="/" className="font-semibold lg:text-xl">
             <Image
               src="/titan.svg"
-              alt="Reign Logo"
+              alt="Titan Logo"
               className="h-24 w-auto invert"
               width={100}
               height={24}

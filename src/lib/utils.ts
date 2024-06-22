@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { createAvatar, type Style } from "@dicebear/core";
 import { identicon } from "@dicebear/collection";
 import { type User } from "next-auth";
-import { Teko } from "@next/font/google";
+import { Teko } from "next/font/google";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

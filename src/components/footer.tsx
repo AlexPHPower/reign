@@ -12,7 +12,7 @@ export default function Footer() {
           >
             <Image
               src="/titan.svg"
-              alt="Reign Logo"
+              alt="Titan Logo"
               className="h-12 w-auto invert"
               width={100}
               height={12}
