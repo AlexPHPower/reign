@@ -10,6 +10,7 @@ import {
   AccordionItem,
 } from "~/components/ui/accordion";
 import { AccordionTriggerPlus } from "~/components/ui/accordionTriggerPlus";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -17,7 +18,7 @@ export default function About() {
       <div className="flex min-h-screen w-full flex-col items-center justify-start gap-10 p-12">
         <div className="flex flex-col items-center space-y-4">
           <h1 className={`text-6xl ${teko.className}`}>
-            About <span className="text-xl text-primary lg:text-6xl">Us</span>
+            About <span className="text-6xl text-primary">Us</span>
           </h1>
           <p className="w-2/3 text-center">
             We, the founders, felt that while Ranked games were engaging, they
@@ -27,8 +28,8 @@ export default function About() {
             matched us with players of similar skill levels.
           </p>
         </div>
-        <div className="mt-8 flex w-full justify-around space-x-8">
-          <div className="w-1/2 space-y-4">
+        <div className="mt-8 flex w-full flex-col justify-around md:flex-row md:space-x-8">
+          <div className="w-full space-y-4 md:w-1/2">
             <Tilt perspective={700}>
               <Image
                 src="/Rick.png"
@@ -60,7 +61,7 @@ export default function About() {
               </Accordion>
             </div>
           </div>
-          <div className="w-1/2 space-y-4">
+          <div className="w-full space-y-4 md:w-1/2">
             <Tilt perspective={700}>
               <Image
                 src="/Biscuit.png"
@@ -92,8 +93,7 @@ export default function About() {
         </div>
         <div className="flex flex-col items-center space-y-4">
           <h1 className={`text-6xl ${teko.className}`}>
-            How does it{" "}
-            <span className="text-xl text-primary lg:text-6xl">work</span>?
+            How does it <span className="text-6xl text-primary">work</span>?
           </h1>
           <p className="w-2/3 text-center">
             Once you&apos;ve signed up and setup a subscription you can queue
@@ -114,14 +114,17 @@ export default function About() {
         </div>
         <div className="flex flex-col items-center space-y-4">
           <h1 className={`text-6xl ${teko.className}`}>
-            Player{" "}
-            <span className="text-xl text-primary lg:text-6xl">profiles</span>
+            Player <span className="text-6xl text-primary">profiles</span>
           </h1>
           <p className="w-2/3 text-center">
             Your player profile and history of games will be available to view
             by other players and E-Sports organisations. For an Org account
-            please contact us at example@email.com as the dashboard for E-Sports
-            Orgs is slightly different to a regular player account.
+            please contact us at{" "}
+            <a href="mailto:example@email.com" className={`text-primary`}>
+              example@email.com
+            </a>{" "}
+            as the dashboard for E-Sports Orgs is slightly different to a
+            regular player account.
           </p>
           <p className="w-2/3 text-center">
             You will be able to search and filter players by their stats and
@@ -133,14 +136,13 @@ export default function About() {
         <div className="flex flex-col items-center space-y-4">
           <h1 className={`text-6xl ${teko.className}`}>
             Frequently asked{" "}
-            <span className="text-xl text-primary lg:text-6xl">questions</span>
+            <span className="text-6xl text-primary">questions</span>
           </h1>
           <p className="w-2/3 text-center">
-            You may find answers to most other questions in our FAQ section.
-            <a href="/pricing" className="text-primary">
-              {" "}
+            You may find answers to most other questions in our FAQ section.{" "}
+            <Link href={`pricing`} className={`text-primary`}>
               Click here
-            </a>{" "}
+            </Link>{" "}
             to view them.
           </p>
         </div>
