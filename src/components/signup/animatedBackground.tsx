@@ -61,7 +61,7 @@ const ParticlesBackground: React.FC = () => {
             default: "bounce",
           },
           random: false,
-          speed: 4,
+          speed: 1,
           straight: false,
           warp: true,
         },
@@ -69,7 +69,7 @@ const ParticlesBackground: React.FC = () => {
           density: {
             enable: true,
           },
-          value: 400,
+          value: 600,
         },
         opacity: {
           value: 0.5,
