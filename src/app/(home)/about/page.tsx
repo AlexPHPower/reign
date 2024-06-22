@@ -140,9 +140,9 @@ export default function About() {
           </h1>
           <p className="w-2/3 text-center">
             You may find answers to most other questions in our FAQ section.{" "}
-            <Link href={`pricing`} className={`text-primary`}>
+            <a href="/pricing#faq" className={`text-primary`}>
               Click here
-            </Link>{" "}
+            </a>{" "}
             to view them.
           </p>
         </div>

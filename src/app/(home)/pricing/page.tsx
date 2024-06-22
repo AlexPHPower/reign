@@ -23,7 +23,7 @@ export default function Page() {
           </p>
         </div>
         <Tiers />
-        <div className="w-4/5 space-y-4">
+        <div className="w-4/5 space-y-4" id={`faq`}>
           <h2 className={`space-x-4 text-center text-6xl ${teko.className}`}>
             Frequently Asked Questions
           </h2>
