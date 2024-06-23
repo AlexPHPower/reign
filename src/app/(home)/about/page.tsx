@@ -10,7 +10,6 @@ import {
   AccordionItem,
 } from "~/components/ui/accordion";
 import { AccordionTriggerPlus } from "~/components/ui/accordionTriggerPlus";
-import Link from "next/link";
 
 export default function About() {
   return (
