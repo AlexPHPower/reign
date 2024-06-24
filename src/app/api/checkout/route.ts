@@ -1,9 +1,12 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { stripe } from "~/lib/stripe";
+import { z } from "zod";
 
-interface CheckoutSessionRequest {
-  priceId: string;
-}
+const CheckoutSessionRequestSchema = z.object({
+  priceId: z.string(),
+});
+
+type CheckoutSessionRequest = z.infer<typeof CheckoutSessionRequestSchema>;
 
 export async function POST(request: NextRequest | null) {
   try {
@@ -11,7 +14,9 @@ export async function POST(request: NextRequest | null) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
-    const body: CheckoutSessionRequest = await request.json();
+    const body: CheckoutSessionRequest = CheckoutSessionRequestSchema.parse(
+      await request.json(),
+    );
 
     if (!body.priceId) {
       return NextResponse.json({ error: "Missing priceId" }, { status: 400 });

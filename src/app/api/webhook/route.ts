@@ -1,15 +1,8 @@
-// app/api/webhook/route.ts
 import { type NextRequest, NextResponse } from "next/server";
 import { stripe } from "~/lib/stripe";
 import { buffer } from "micro";
 import { convertToIncomingMessage } from "~/lib/convertToIncomingMessage";
 import type Stripe from "stripe";
-
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
 
 export async function POST(request: NextRequest) {
   const rawRequest = convertToIncomingMessage(request);
