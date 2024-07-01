@@ -8,6 +8,7 @@
 - [x] Add logic for fetching a single user from the database
 - [x] Add authentication via discord
 - [x] Add league page
+- [ ] Add Redirect pages for Stripe payments
 - [ ] Add user page for settings management
 - [ ] Add user page for viewing user profile
 - [ ] Add user page for viewing user stats
