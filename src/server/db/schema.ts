@@ -41,17 +41,19 @@ export const posts = createTable(
 export const users = createTable("user", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),
   name: varchar("name", { length: 255 }),
-  email: varchar("email", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
   emailVerified: timestamp("emailVerified", {
     mode: "date",
   }).default(sql`CURRENT_TIMESTAMP`),
   inGameName: varchar("inGameName", { length: 255 }),
   image: varchar("image", { length: 255 }),
   password: text("password"),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  stripeSubscriptions: many(stripeSubscriptions),
 }));
 
 export const accounts = createTable(
@@ -114,5 +116,31 @@ export const verificationTokens = createTable(
   },
   (vt) => ({
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
+  }),
+);
+
+export const stripeSubscriptions = createTable("stripeSubscription", {
+  id: varchar("id", { length: 255 }).notNull().primaryKey(),
+  userId: varchar("userId", { length: 255 })
+    .notNull()
+    .references(() => users.id),
+  stripeSubscriptionId: varchar("stripeSubscriptionId", {
+    length: 255,
+  }).notNull(),
+  stripeCustomerId: varchar("stripeCustomerId", { length: 255 }).notNull(),
+  stripePriceId: varchar("stripePriceId", { length: 255 }).notNull(),
+  quantity: integer("quantity").notNull(),
+  startDate: timestamp("startDate", { mode: "date" }).notNull(),
+  endDate: timestamp("endDate", { mode: "date" }).notNull(),
+  status: varchar("status", { length: 255 }).notNull(),
+});
+
+export const stripeSubscriptionsRelations = relations(
+  stripeSubscriptions,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [stripeSubscriptions.userId],
+      references: [users.id],
+    }),
   }),
 );

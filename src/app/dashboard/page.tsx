@@ -1,7 +1,14 @@
+"use client";
+
+import { useSession } from "next-auth/react";
+
 export default function Dashboard() {
-  return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
-      FUCKIN YOLO MFERS
-    </main>
-  );
+  const { data: session, status } = useSession();
+
+  if (session?.user)
+    return (
+      <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+        FUCKIN YOLO MFERS
+      </main>
+    );
 }

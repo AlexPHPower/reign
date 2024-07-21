@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { z } from "zod";
+import { useSession } from "next-auth/react";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY!);
 
@@ -14,6 +15,7 @@ type CheckoutResponse = z.infer<typeof CheckoutResponseSchema>;
 
 export default function CheckoutButton() {
   const [loading, setLoading] = useState(false);
+  const { data: session } = useSession();
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -24,7 +26,10 @@ export default function CheckoutButton() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ priceId: "price_1PUWnYRxSHK9mwecIN77Kgty" }),
+        body: JSON.stringify({
+          priceId: "price_1PUWnYRxSHK9mwecIN77Kgty",
+          userEmail: session?.user?.email,
+        }),
       });
 
       if (!response.ok) {
