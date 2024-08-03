@@ -53,9 +53,9 @@ export default function Dashboard() {
                 <button className="rounded bg-blue-500 p-2 text-white">
                   Manage Subscription
                 </button>
-              ) : (
-                <CheckoutButton />
-              )}
+              ) : tier.id.length > 0 ? (
+                <CheckoutButton priceId={tier.id} />
+              ) : null}
             </CardContent>
           </Card>
         ))}

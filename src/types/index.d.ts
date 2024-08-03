@@ -37,6 +37,7 @@ export interface TierDetails {
   description: string;
   features: Feature[];
   price: number;
+  id: string;
 }
 
 export interface Tier {
@@ -65,4 +66,12 @@ type PlayerProfile = {
   leagueWins: number;
   rival: string;
   main: string;
+};
+
+type StripePrice = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  features: { name: string; enabled: boolean }[];
 };

@@ -13,9 +13,13 @@ const CheckoutResponseSchema = z.object({
 
 type CheckoutResponse = z.infer<typeof CheckoutResponseSchema>;
 
-export default function CheckoutButton() {
+export default function CheckoutButton({ priceId }: { priceId: string }) {
   const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+
+  if (priceId.length === 0) {
+    throw new Error("Price ID is required");
+  }
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -27,7 +31,7 @@ export default function CheckoutButton() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          priceId: "price_1PUWnYRxSHK9mwecIN77Kgty",
+          priceId: priceId,
           userEmail: session?.user?.email,
         }),
       });

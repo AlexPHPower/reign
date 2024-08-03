@@ -119,7 +119,28 @@ export async function POST(request: NextRequest) {
 
       break;
     case "invoice.payment_failed":
-      // handle failed payment here
+    case "checkout.session.async_payment_failed":
+    case "payment_intent.payment_failed":
+      if (!event.data.object.customer) {
+        return NextResponse.json(
+          { error: "Customer ID not found in event data" },
+          { status: 404 },
+        );
+      }
+
+      await db
+        .delete(stripeSubscriptions)
+        .where(
+          and(
+            eq(
+              stripeSubscriptions.stripeCustomerId,
+              typeof event.data.object.customer === "string"
+                ? event.data.object.customer
+                : event.data.object.customer.id,
+            ),
+            eq(stripeSubscriptions.status, "pending"),
+          ),
+        );
       break;
     default:
       console.log(`Unhandled event type ${event.type}`);

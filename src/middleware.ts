@@ -36,9 +36,23 @@ export default withAuth(
           ),
       });
 
-      if (subscriptions.length === 0) {
+      const pendingSubscriptions = await db.query.stripeSubscriptions.findMany({
+        where: (subscriptions, { eq }) =>
+          and(
+            eq(subscriptions.userId, userId),
+            eq(subscriptions.status, "pending"),
+          ),
+      });
+
+      if (subscriptions.length === 0 && pendingSubscriptions.length === 0) {
         return NextResponse.redirect(
           new URL("/dashboard/settings/subscribe", req.url),
+        );
+      }
+
+      if (subscriptions.length === 0 && pendingSubscriptions.length > 0) {
+        return NextResponse.redirect(
+          new URL("/dashboard/settings/pending", req.url),
         );
       }
     } catch (error) {

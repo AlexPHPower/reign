@@ -12,7 +12,7 @@ const CheckoutSessionRequestSchema = z.object({
 
 type CheckoutSessionRequest = z.infer<typeof CheckoutSessionRequestSchema>;
 
-export async function POST(request: NextRequest | null) {
+export async function POST(request: NextRequest) {
   try {
     if (!request) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest | null) {
     });
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "paypal"],
       mode: "subscription",
       customer: customer.id,
       line_items: [
