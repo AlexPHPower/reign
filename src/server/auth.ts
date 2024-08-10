@@ -12,6 +12,7 @@ import { env } from "~/env";
 import { db } from "~/server/db";
 import { createTable } from "~/server/db/schema";
 import bcrypt from "bcrypt";
+import { and } from "drizzle-orm";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -23,6 +24,7 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
+      priceId: string | null;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -93,6 +95,22 @@ export const authOptions: NextAuthOptions = {
     newUser: "/auth/register",
   },
   callbacks: {
+    async session({ session }) {
+      const user = await db.query.users.findFirst({});
+
+      const subscription = await db.query.stripeSubscriptions.findFirst({
+        where: (subscriptions, { eq }) =>
+          and(
+            eq(subscriptions.userId, session.user.id),
+            eq(subscriptions.status, "pending"),
+          ),
+      });
+
+      session.user.priceId = subscription?.stripePriceId ?? null;
+      console.log("subscription", subscription);
+
+      return session;
+    },
     async redirect({ url, baseUrl }) {
       return url.startsWith("/") ? `${baseUrl}/dashboard` : url;
     },

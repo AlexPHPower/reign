@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { api } from "~/trpc/react";
 import React from "react";
 import type { TierDetails } from "~/types";
-import { db } from "~/server/db";
 import { NextResponse } from "next/server";
 import CheckoutButton from "~/components/stripe/checkoutButton";
+import { CircleCheck, CircleX } from "lucide-react";
 
 export default function Dashboard() {
   const { data: session, status } = useSession();
@@ -16,12 +16,6 @@ export default function Dashboard() {
   }
 
   const { data, error, isLoading } = api.tier.tiers.useQuery();
-  // const userId = session.user.id;
-  const subscription = [];
-
-  // await db.query.stripeSubscriptions.findMany({
-  //   where: (subscriptions, { eq }) => eq(subscriptions.userId, userId),
-  // });
 
   if (isLoading) {
     return "Loading";
@@ -41,15 +35,27 @@ export default function Dashboard() {
         {Object.entries(data).map(([key, tier]: [string, TierDetails]) => (
           <Card
             key={key}
-            className={`relative flex w-1/3 max-w-sm flex-col border-4 border-blue-600 bg-gray-500 shadow-lg`}
+            className={`relative flex w-1/3 max-w-sm flex-col ${session.user.priceId === tier.id ? "border-4 border-blue-600 bg-gray-500" : ""} shadow-lg`}
           >
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <CardTitle className="flex items-center">{tier.title}</CardTitle>
               <CardTitle className="flex items-center">£{tier.price}</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className={`space-y-4`}>
               <p>{tier.description}</p>
-              {subscription.length > 0 ? (
+              <ul className={`text-center text-neutral-200`} role={`list`}>
+                {tier.features.map(({ name, enabled }) => (
+                  <li className={`flex items-center`} key={name}>
+                    {enabled ? (
+                      <CircleCheck className={`mr-1 h-5 w-5 text-green-500`} />
+                    ) : (
+                      <CircleX className={`mr-1 h-5 w-5 text-red-500`} />
+                    )}
+                    {name}
+                  </li>
+                ))}
+              </ul>
+              {session.user.priceId ? (
                 <button className="rounded bg-blue-500 p-2 text-white">
                   Manage Subscription
                 </button>
