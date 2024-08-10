@@ -95,21 +95,27 @@ export const authOptions: NextAuthOptions = {
     newUser: "/auth/register",
   },
   callbacks: {
-    async session({ session }) {
-      const user = await db.query.users.findFirst({});
+    session: async ({ session, token }) => {
+      if (session?.user && token?.sub) {
+        session.user.id = token.sub;
 
-      const subscription = await db.query.stripeSubscriptions.findFirst({
-        where: (subscriptions, { eq }) =>
-          and(
-            eq(subscriptions.userId, session.user.id),
-            eq(subscriptions.status, "pending"),
-          ),
-      });
+        const subscription = await db.query.stripeSubscriptions.findFirst({
+          where: (subscriptions, { eq }) =>
+            and(
+              eq(subscriptions.userId, session.user.id),
+              eq(subscriptions.status, "active"),
+            ),
+        });
 
-      session.user.priceId = subscription?.stripePriceId ?? null;
-      console.log("subscription", subscription);
-
+        session.user.priceId = subscription?.stripePriceId ?? null;
+      }
       return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
     },
     async redirect({ url, baseUrl }) {
       return url.startsWith("/") ? `${baseUrl}/dashboard` : url;

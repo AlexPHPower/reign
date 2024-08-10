@@ -174,3 +174,39 @@
         background: white; /* color of the scrollbar thumb when hovered */
     }
 }
+
+@layer utilities {
+    .card-wrapper {
+        @apply relative overflow-hidden rounded-2xl;
+    }
+
+    /* Gradient */
+    .card-wrapper::before {
+        background: conic-gradient(
+                rgb(233, 87, 12) 0deg,
+                rgb(173, 62, 6) 0deg,
+                transparent 80deg
+        );
+
+        @apply absolute left-[-25%] top-[-25%] h-[150%] w-[150%] animate-border-spin content-[''];
+    }
+
+    .card-wrapper-green {
+        @apply relative overflow-hidden rounded-2xl;
+    }
+
+    /* Gradient */
+    .card-wrapper-green::before {
+        background: conic-gradient(
+                rgb(9, 203, 10) 0deg,
+                rgb(5, 150, 5) 0deg,
+                transparent 80deg
+        );
+
+        @apply absolute left-[-25%] top-[-25%] h-[150%] w-[150%] animate-border-spin content-[''];
+    }
+
+    .card-content {
+        @apply relative left-[1px] top-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] rounded-2xl;
+    }
+}
