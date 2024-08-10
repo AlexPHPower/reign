@@ -4,6 +4,160 @@ import type Stripe from "stripe";
 import { stripeSubscriptions } from "~/server/db/schema";
 import { db } from "~/server/db";
 import { and, eq } from "drizzle-orm";
+import { createId } from "@paralleldrive/cuid2";
+
+async function handleInvoicePaid(eventObject: Stripe.Invoice) {
+  const {
+    id: invoiceId,
+    customer: customerId,
+    customer_email: customerEmail,
+    lines,
+    subscription,
+  } = eventObject;
+  const priceId = lines.data[0]?.price?.id;
+
+  if (
+    !customerId ||
+    !invoiceId ||
+    !customerEmail ||
+    !priceId ||
+    !subscription
+  ) {
+    return NextResponse.json(
+      { error: "Missing required data in event object" },
+      { status: 404 },
+    );
+  }
+
+  const user = await db.query.users.findFirst({
+    where: (users, { eq }) => eq(users.email, customerEmail),
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  await db.transaction(async (tx) => {
+    await tx
+      .update(stripeSubscriptions)
+      .set({ status: "expired" })
+      .where(
+        and(
+          eq(
+            stripeSubscriptions.stripeCustomerId,
+            typeof customerId === "string" ? customerId : customerId.id,
+          ),
+          eq(stripeSubscriptions.status, "active"),
+        ),
+      );
+
+    await tx.insert(stripeSubscriptions).values({
+      id: createId(),
+      userId: user.id,
+      stripeSubscriptionId:
+        typeof subscription === "string" ? subscription : subscription.id,
+      stripeCustomerId:
+        typeof customerId === "string" ? customerId : customerId.id,
+      stripePriceId: priceId,
+      quantity: 1,
+      startDate: new Date(),
+      endDate: new Date(),
+      status: "active",
+    });
+  });
+
+  return NextResponse.json({ received: true });
+}
+
+async function handleCheckoutSessionCompleted(
+  eventObject: Stripe.Checkout.Session,
+) {
+  const {
+    payment_status,
+    invoice: invoiceId,
+    customer: customerId,
+    metadata,
+  } = eventObject;
+
+  if (payment_status !== "paid") {
+    return NextResponse.json(
+      {
+        received: true,
+        message: "Payment not completed",
+      },
+      { status: 200 },
+    );
+  }
+
+  if (!customerId || !invoiceId || !metadata) {
+    return NextResponse.json(
+      { error: "Missing required data in event object" },
+      { status: 404 },
+    );
+  }
+
+  const invoice: Stripe.Invoice = await stripe.invoices.retrieve(
+    typeof invoiceId === "string" ? invoiceId : invoiceId.id,
+  );
+
+  const { userId, tempSubscriptionId } = metadata;
+  const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+
+  if (!userId || !tempSubscriptionId) {
+    return NextResponse.json(
+      { error: "Subscription or User ID not found in metadata" },
+      { status: 404 },
+    );
+  }
+
+  await db
+    .update(stripeSubscriptions)
+    .set({
+      stripeCustomerId:
+        typeof customerId === "string" ? customerId : customerId.id,
+      stripePriceId: invoice.lines.data[0]!.price!.id,
+      stripeSubscriptionId:
+        typeof invoice.subscription === "string"
+          ? invoice.subscription
+          : invoice.subscription?.id,
+      quantity: 1,
+      startDate: new Date(),
+      endDate: endDate,
+      status: "active",
+    })
+    .where(
+      and(
+        eq(stripeSubscriptions.userId, userId),
+        eq(stripeSubscriptions.stripeSubscriptionId, tempSubscriptionId),
+      ),
+    );
+
+  return NextResponse.json({ received: true });
+}
+
+async function handlePaymentFailed(
+  eventObject: Stripe.PaymentIntent | Stripe.Checkout.Session | Stripe.Invoice,
+) {
+  const customerId = eventObject.customer?.toString();
+
+  if (!customerId) {
+    return NextResponse.json(
+      { error: "Customer ID not found in event data" },
+      { status: 404 },
+    );
+  }
+
+  await db
+    .delete(stripeSubscriptions)
+    .where(
+      and(
+        eq(stripeSubscriptions.stripeCustomerId, customerId),
+        eq(stripeSubscriptions.status, "pending"),
+      ),
+    );
+
+  return NextResponse.json({ received: true });
+}
 
 export async function POST(request: NextRequest) {
   const buf = await request.text();
@@ -31,117 +185,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Handle the event
   switch (event.type) {
     case "checkout.session.completed":
-      const eventObject = event.data.object;
-
-      if (eventObject.payment_status !== "paid") {
-        return NextResponse.json(
-          {
-            received: true,
-            message: "Payment not completed",
-          },
-          { status: 200 },
-        );
-      }
-
-      const invoiceId = eventObject.invoice;
-      const customerId = eventObject.customer;
-
-      if (!customerId) {
-        return NextResponse.json(
-          { error: "Customer ID not found in event data" },
-          { status: 404 },
-        );
-      }
-
-      if (!invoiceId) {
-        return NextResponse.json(
-          { error: "Invoice ID not found in event data" },
-          { status: 404 },
-        );
-      }
-
-      const invoice: Stripe.Invoice = await stripe.invoices.retrieve(
-        typeof invoiceId === "string" ? invoiceId : invoiceId.id,
-      );
-
-      if (!invoice) {
-        return NextResponse.json(
-          { error: "Invoice not found" },
-          { status: 404 },
-        );
-      }
-
-      const userId = eventObject.metadata!.userId;
-      const tempSubscriptionId = eventObject.metadata!.tempSubscriptionId;
-
-      const endDate = invoice.due_date
-        ? new Date(invoice.due_date * 1000)
-        : new Date(new Date().getDate() + 30);
-
-      if (!tempSubscriptionId) {
-        return NextResponse.json(
-          { error: "Subscription ID not found in metadata" },
-          { status: 404 },
-        );
-      }
-
-      if (!userId) {
-        return NextResponse.json(
-          { error: "User ID not found in metadata" },
-          { status: 402 },
-        );
-      }
-
-      await db
-        .update(stripeSubscriptions)
-        .set({
-          stripeCustomerId:
-            typeof customerId === "string" ? customerId : customerId.id,
-          stripePriceId: invoice.lines.data[0]!.price!.id,
-          stripeSubscriptionId:
-            typeof invoice.subscription === "string"
-              ? invoice.subscription
-              : invoice.subscription!.id,
-          quantity: 1,
-          startDate: new Date(),
-          endDate: endDate,
-          status: "active",
-        })
-        .where(
-          and(
-            eq(stripeSubscriptions.userId, userId),
-            eq(stripeSubscriptions.stripeSubscriptionId, tempSubscriptionId),
-          ),
-        );
-
-      break;
+      return await handleCheckoutSessionCompleted(event.data.object);
     case "invoice.payment_failed":
     case "checkout.session.async_payment_failed":
     case "payment_intent.payment_failed":
-      if (!event.data.object.customer) {
-        return NextResponse.json(
-          { error: "Customer ID not found in event data" },
-          { status: 404 },
-        );
-      }
-
-      await db
-        .delete(stripeSubscriptions)
-        .where(
-          and(
-            eq(
-              stripeSubscriptions.stripeCustomerId,
-              typeof event.data.object.customer === "string"
-                ? event.data.object.customer
-                : event.data.object.customer.id,
-            ),
-            eq(stripeSubscriptions.status, "pending"),
-          ),
-        );
-      break;
+      return await handlePaymentFailed(event.data.object);
+    case "invoice.paid":
+      return await handleInvoicePaid(event.data.object);
     default:
       console.log(`Unhandled event type ${event.type}`);
   }

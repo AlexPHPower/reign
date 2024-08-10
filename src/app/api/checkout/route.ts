@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       stripePriceId: body.priceId,
       quantity: 1,
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
       status: "pending",
     });
 
