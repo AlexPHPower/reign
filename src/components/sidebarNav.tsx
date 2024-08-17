@@ -8,6 +8,7 @@ import {
 } from "~/components/ui/tooltip";
 import React from "react";
 import { Separator } from "~/components/ui/separator";
+import { NavigationMenuSettings } from "~/components/dashboard/settingsNavigationMenu";
 
 export default function SidebarNav() {
   return (
@@ -65,20 +66,9 @@ export default function SidebarNav() {
         </TooltipProvider>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Link
-                href="/dashboard/settings/account"
-                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-              >
-                <Settings className="h-5 w-5" />
-                <span className="sr-only">Settings</span>
-              </Link>
-            </TooltipTrigger>
-            <TooltipContent side="right">Settings</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <NavigationMenuSettings>
+          <Settings className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-7 md:w-7" />
+        </NavigationMenuSettings>
       </nav>
     </aside>
   );
