@@ -75,6 +75,7 @@ export default function CheckoutButton({ priceId }: { priceId: string }) {
         role="link"
         onClick={handleCheckout}
         disabled={loading}
+        className="rounded border border-gray-600 bg-card p-2 text-white"
       >
         Checkout
       </button>
