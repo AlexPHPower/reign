@@ -82,14 +82,6 @@ export default function Page() {
                 can.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-6">
-              <AccordionTrigger>What if i forget to cancel?</AccordionTrigger>
-              <AccordionContent>
-                If you forget to cancel your membership and haven&apos;t yet
-                played any games fear not as we only take payment once you have
-                had a participating game in the league.
-              </AccordionContent>
-            </AccordionItem>
             <AccordionItem value="item-7">
               <AccordionTrigger>When do you payout?</AccordionTrigger>
               <AccordionContent>

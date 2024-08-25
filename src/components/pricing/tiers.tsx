@@ -1,14 +1,16 @@
 import { api } from "~/trpc/react";
-import LoadingPricePage from "~/app/(home)/pricing/loading";
 import type { TierDetails } from "~/types";
 import TierCard from "~/components/pricing/tier-card";
 import React from "react";
+import LoadingTierCard from "~/app/(home)/pricing/loading";
 
 export default function Tiers() {
   const { data, error, isLoading } = api.tier.tiers.useQuery();
 
   if (isLoading) {
-    return <LoadingPricePage />;
+    return (
+      <LoadingTierCard className="grid grid-cols-1 gap-8 lg:grid-cols-3" />
+    );
   }
 
   if (error) {

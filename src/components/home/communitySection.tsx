@@ -15,7 +15,7 @@ export default function CommunitySection() {
     <div className="mx-auto mb-20 flex w-full flex-col items-center">
       <div className="flex w-11/12 flex-nowrap items-center justify-center">
         <Card
-          className={`bg-radial-gradient flex flex-row p-8 shadow shadow-2xl backdrop-brightness-125`} // added padding to the Card
+          className={`bg-radial-gradient flex flex-row p-8 shadow-2xl backdrop-brightness-125`}
         >
           <CardHeader className={`w-full items-center justify-center`}>
             <CardTitle
