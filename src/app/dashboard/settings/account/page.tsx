@@ -14,11 +14,12 @@ import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { api } from "~/trpc/react";
 import { toast } from "~/components/ui/use-toast";
-import { Form } from "~/components/ui/form";
+import { Form, FormControl, FormField, FormItem } from "~/components/ui/form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { NextResponse } from "next/server";
+import React from "react";
 
 const EaIdInputSchema = z.object({
   eaId: z.string(),
@@ -38,8 +39,9 @@ export default function Account() {
     return NextResponse.redirect(new URL("/auth/signin"));
   }
 
+  const mutation = api.userProfile.eaId.useMutation();
+
   const onEaIdChange = async (data: z.infer<typeof EaIdInputSchema>) => {
-    const mutation = api.userProfile.eaId.useMutation();
     try {
       mutation.mutate(data);
 
@@ -80,16 +82,31 @@ export default function Account() {
                   .
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <Form {...eaIdForm}>
-                  <form onSubmit={eaIdForm.handleSubmit(onEaIdChange)}>
-                    <Input placeholder="EA ID" />
-                  </form>
-                </Form>
-              </CardContent>
-              <CardFooter className="border-t px-6 py-4">
-                <Button>Save</Button>
-              </CardFooter>
+              <Form {...eaIdForm}>
+                <form onSubmit={eaIdForm.handleSubmit(onEaIdChange)}>
+                  <CardContent>
+                    <FormField
+                      control={eaIdForm.control}
+                      name="eaId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              id="ea-id"
+                              placeholder="EA ID"
+                              required
+                              {...field}
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </CardContent>
+                  <CardFooter className="border-t px-6 py-4">
+                    <Button type="submit">Save</Button>
+                  </CardFooter>
+                </form>
+              </Form>
             </Card>
             <Card x-chunk="dashboard-04-chunk-2">
               <CardHeader>
