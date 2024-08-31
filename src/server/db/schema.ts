@@ -46,6 +46,7 @@ export const users = createTable("user", {
     mode: "date",
   }).default(sql`CURRENT_TIMESTAMP`),
   inGameName: varchar("inGameName", { length: 255 }),
+  eaId: varchar("eaId", { length: 255 }),
   image: varchar("image", { length: 255 }),
   password: text("password"),
   stripeCustomerId: varchar("stripeCustomerId", { length: 255 }),

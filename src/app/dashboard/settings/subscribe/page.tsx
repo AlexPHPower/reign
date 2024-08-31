@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   return (
     <main className={`space-y-4 p-4`}>
-      <SubscriptionInfoCard></SubscriptionInfoCard>
+      <SubscriptionInfoCard />
       <PricingTierCard session={session}></PricingTierCard>
     </main>
   );
